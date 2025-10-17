@@ -2,7 +2,7 @@
 
 namespace App\Mcp\Tools;
 
-use App\Mcp\Resources\StatsCardTemplate;
+use App\Mcp\Resources\PerformanceApp;
 use Illuminate\JsonSchema\JsonSchema;
 use Laravel\Mcp\Request;
 use Laravel\Mcp\Response;
@@ -10,13 +10,13 @@ use Laravel\Mcp\Server\Tool;
 use Laravel\Mcp\Server\Tools\Annotations\IsReadOnly;
 
 #[IsReadOnly()]
-class GetStatsTool extends Tool
+class GetPerformanceTool extends Tool
 {
     /**
      * The tool's description.
      */
     protected string $description = <<<'MARKDOWN'
-        Get key statistics about the platform, such as number of creators, platform fee, and uptime.
+        Get current platform performance statistics.
     MARKDOWN;
 
     /**
@@ -61,9 +61,9 @@ class GetStatsTool extends Tool
         return [
             ...parent::toArray(),
             '_meta' => [
-                'openai/outputTemplate' => StatsCardTemplate::TEMPLATE,
+                'openai/outputTemplate' => PerformanceApp::TEMPLATE,
                 'openai/toolInvocation/invoking' => 'Collecting data from platforms...',
-                // 'openai/toolInvocation/invoked' => 'Displayed the stats card',
+                // 'openai/toolInvocation/invoked' => 'Displayed the performance app',
                 'openai/widgetAccessible' => true,
                 'openai/widgetPrefersBorder' => true,
             ],

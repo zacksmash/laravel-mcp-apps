@@ -6,13 +6,13 @@ use Laravel\Mcp\Request;
 use Laravel\Mcp\Response;
 use Laravel\Mcp\Server\Resource;
 
-class StatsCardTemplate extends Resource
+class PerformanceApp extends Resource
 {
-    const TEMPLATE = 'ui://apps/index.html';
+    const TEMPLATE = 'ui://apps/performance.html';
 
-    protected string $name = 'stats-card-template';
+    protected string $name = 'performance-app';
 
-    protected string $title = 'Stats Card';
+    protected string $title = 'Performance App';
 
     protected string $mimeType = 'text/html+skybridge';
 
@@ -22,7 +22,7 @@ class StatsCardTemplate extends Resource
      * The resource's description.
      */
     protected string $description = <<<'MARKDOWN'
-        A simple stats card template built with Tailwind CSS and Blade.
+        A simple performance app template built with Tailwind CSS and Blade.
     MARKDOWN;
 
     /**

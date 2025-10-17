@@ -1,11 +1,9 @@
 <script setup>
-import { useRouter } from 'vue-router';
+import PerformanceView from '@/pages/PerformanceView.vue';
 
-const router = useRouter();
-
-router.replace('about')
+console.log(window.openai)
 </script>
 
 <template>
-    <RouterView />
+    <PerformanceView />
 </template>

@@ -5,12 +5,12 @@ namespace App\Mcp\Servers;
 use App\Mcp\Methods\CallTool;
 use Laravel\Mcp\Server;
 
-class StatsCardServer extends Server
+class PerformanceAppServer extends Server
 {
     /**
      * The MCP server's name.
      */
-    protected string $name = 'Stats Card Server';
+    protected string $name = 'Performance App Server';
 
     /**
      * The MCP server's version.
@@ -21,7 +21,7 @@ class StatsCardServer extends Server
      * The MCP server's instructions for the LLM.
      */
     protected string $instructions = <<<'MARKDOWN'
-        You are a helpful assistant that provides a simple stats card template built with Tailwind CSS and Blade.
+        You are a helpful assistant that provides a simple performance app template built with Tailwind CSS and Blade.
     MARKDOWN;
 
     /**
@@ -30,7 +30,7 @@ class StatsCardServer extends Server
      * @var array<int, class-string<\Laravel\Mcp\Server\Tool>>
      */
     protected array $tools = [
-        \App\Mcp\Tools\GetStatsTool::class,
+        \App\Mcp\Tools\GetPerformanceTool::class,
     ];
 
     /**
@@ -39,7 +39,7 @@ class StatsCardServer extends Server
      * @var array<int, class-string<\Laravel\Mcp\Server\Resource>>
      */
     protected array $resources = [
-        \App\Mcp\Resources\StatsCardTemplate::class,
+        \App\Mcp\Resources\PerformanceApp::class,
     ];
 
     /**
