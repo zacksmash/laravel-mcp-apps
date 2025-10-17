@@ -1,4 +1,4 @@
-import { computed, ref, readonly, onMounted, onUnmounted, type Ref } from "vue";
+import { ref, readonly, onMounted, onUnmounted, type Ref } from "vue";
 import {
     SET_GLOBALS_EVENT_TYPE,
     type SetGlobalsEvent,
@@ -36,17 +36,5 @@ export function useOpenAiGlobal<K extends keyof OpenAiGlobals>(
         }
     });
 
-    const bound = computed(() => {
-        const v = state.value as unknown;
-        if (
-            typeof v === "function" &&
-            typeof window !== "undefined" &&
-            window.openai
-        ) {
-            return (v as Function).bind(window.openai) as unknown as OpenAiGlobals[K];
-        }
-        return state.value;
-    });
-
-    return readonly(bound) as Readonly<Ref<OpenAiGlobals[K] | null>>;
+    return readonly(state) as Readonly<Ref<OpenAiGlobals[K] | null>>;
 }
