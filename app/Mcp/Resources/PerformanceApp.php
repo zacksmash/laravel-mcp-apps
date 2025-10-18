@@ -28,21 +28,16 @@ class PerformanceApp extends Resource
      */
     public function handle(): Response|array
     {
-        return Response::text(view('mcp.index')->render());
+        return Response::app(meta: [
+            // 'openai/widgetDescription' => '',
+            'openai/widgetPrefersBorder' => true,
+            // 'openai/widgetCSP' => '',
+            // 'openai/widgetDomain' => '',
+        ]);
     }
 
     public static function template()
     {
         return (new self)->uri;
-    }
-
-    public function meta(): array
-    {
-        return [
-            // 'openai/widgetDescription' => '',
-            'openai/widgetPrefersBorder' => true,
-            // 'openai/widgetCSP' => '',
-            // 'openai/widgetDomain' => '',
-        ];
     }
 }

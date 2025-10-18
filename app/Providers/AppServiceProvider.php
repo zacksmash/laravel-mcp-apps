@@ -29,8 +29,10 @@ class AppServiceProvider extends ServiceProvider
             'mcp:use' => 'Use the Weather MCP',
         ]);
 
-        // Response::macro('app', function (string $text) {
-        //     return new static(new \App\Mcp\Content\App($text));
-        // });
+        Response::macro('app', function (View|string|null $view = null, ?array $meta = null) {
+            $view = $view ?? view('mcp.app');
+
+            return new static(new \App\Mcp\Content\App($view->render(), $meta));
+        });
     }
 }

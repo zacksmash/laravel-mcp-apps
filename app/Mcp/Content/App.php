@@ -9,8 +9,10 @@ use Laravel\Mcp\Server\Tool;
 
 class App implements Content
 {
-    public function __construct(protected string $text)
-    {
+    public function __construct(
+        protected string $text,
+        protected ?array $meta,
+    ) {
         //
     }
 
@@ -35,14 +37,14 @@ class App implements Content
      */
     public function toResource(Resource $resource): array
     {
-        return [
+        return array_filter([
             'text' => $this->text,
             'uri' => $resource->uri(),
             'name' => $resource->name(),
             'title' => $resource->title(),
             'mimeType' => $resource->mimeType(),
-            '_meta' => $resource->meta(),
-        ];
+            '_meta' => $this->meta ?? null,
+        ], fn ($value) => $value !== null);
     }
 
     public function __toString(): string

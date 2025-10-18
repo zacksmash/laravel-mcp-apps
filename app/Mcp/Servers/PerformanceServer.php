@@ -3,7 +3,6 @@
 namespace App\Mcp\Servers;
 
 use App\Mcp\Methods\CallTool;
-use App\Mcp\Methods\ReadResource;
 use Laravel\Mcp\Server;
 
 class PerformanceServer extends Server
@@ -66,6 +65,5 @@ class PerformanceServer extends Server
          * @override Method for tools/call
          */
         $this->addMethod('tools/call', CallTool::class);
-        $this->addMethod('resources/read', ReadResource::class);
     }
 }
