@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Laravel\Mcp\Response;
 use Laravel\Passport\Passport;
 
 class AppServiceProvider extends ServiceProvider
@@ -27,5 +28,9 @@ class AppServiceProvider extends ServiceProvider
         Passport::tokensCan([
             'mcp:use' => 'Use the Weather MCP',
         ]);
+
+        // Response::macro('app', function (string $text) {
+        //     return new static(new \App\Mcp\Content\App($text));
+        // });
     }
 }

@@ -10,7 +10,7 @@ use Laravel\Mcp\Server\Tool;
 use Laravel\Mcp\Server\Tools\Annotations\IsReadOnly;
 
 #[IsReadOnly()]
-class GetPerformanceTool extends Tool
+class PerformanceTool extends Tool
 {
     /**
      * The tool's description.
@@ -56,16 +56,18 @@ class GetPerformanceTool extends Tool
         return [];
     }
 
+    /**
+     * @override Get the tool array representation.
+     */
     public function toArray(): array
     {
         return [
             ...parent::toArray(),
             '_meta' => [
-                'openai/outputTemplate' => PerformanceApp::TEMPLATE,
-                'openai/toolInvocation/invoking' => 'Collecting data from platforms...',
-                // 'openai/toolInvocation/invoked' => 'Displayed the performance app',
+                'openai/outputTemplate' => PerformanceApp::template(),
                 'openai/widgetAccessible' => true,
-                'openai/widgetPrefersBorder' => true,
+                'openai/toolInvocation/invoking' => 'Collecting data from platforms...',
+                'openai/toolInvocation/invoked' => 'Displayed the performance app',
             ],
         ];
     }

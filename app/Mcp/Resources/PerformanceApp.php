@@ -8,15 +8,13 @@ use Laravel\Mcp\Server\Resource;
 
 class PerformanceApp extends Resource
 {
-    const TEMPLATE = 'ui://apps/performance.html';
-
     protected string $name = 'performance-app';
 
     protected string $title = 'Performance App';
 
     protected string $mimeType = 'text/html+skybridge';
 
-    protected string $uri = self::TEMPLATE;
+    protected string $uri = 'ui://apps/performance';
 
     /**
      * The resource's description.
@@ -28,8 +26,23 @@ class PerformanceApp extends Resource
     /**
      * Handle the resource request.
      */
-    public function handle(): Response
+    public function handle(): Response|array
     {
         return Response::text(view('mcp.index')->render());
+    }
+
+    public static function template()
+    {
+        return (new self)->uri;
+    }
+
+    public function meta(): array
+    {
+        return [
+            // 'openai/widgetDescription' => '',
+            'openai/widgetPrefersBorder' => true,
+            // 'openai/widgetCSP' => '',
+            // 'openai/widgetDomain' => '',
+        ];
     }
 }

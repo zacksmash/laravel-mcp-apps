@@ -3,9 +3,10 @@
 namespace App\Mcp\Servers;
 
 use App\Mcp\Methods\CallTool;
+use App\Mcp\Methods\ReadResource;
 use Laravel\Mcp\Server;
 
-class PerformanceAppServer extends Server
+class PerformanceServer extends Server
 {
     /**
      * The MCP server's name.
@@ -21,7 +22,15 @@ class PerformanceAppServer extends Server
      * The MCP server's instructions for the LLM.
      */
     protected string $instructions = <<<'MARKDOWN'
-        You are a helpful assistant that provides a simple performance app template built with Tailwind CSS and Blade.
+        This server provides tools that allow users to get current platform performance statistics.
+
+        Available Tools
+        -----------------
+        - GetPerformanceTool: Get current platform performance statistics.
+
+        Available Resources
+        --------------------
+        - PerformanceApp: A simple performance app template built with Tailwind CSS and Blade.
     MARKDOWN;
 
     /**
@@ -30,7 +39,7 @@ class PerformanceAppServer extends Server
      * @var array<int, class-string<\Laravel\Mcp\Server\Tool>>
      */
     protected array $tools = [
-        \App\Mcp\Tools\GetPerformanceTool::class,
+        \App\Mcp\Tools\PerformanceTool::class,
     ];
 
     /**
@@ -53,6 +62,10 @@ class PerformanceAppServer extends Server
 
     protected function boot(): void
     {
+        /**
+         * @override Method for tools/call
+         */
         $this->addMethod('tools/call', CallTool::class);
+        $this->addMethod('resources/read', ReadResource::class);
     }
 }

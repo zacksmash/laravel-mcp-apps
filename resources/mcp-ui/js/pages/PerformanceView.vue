@@ -1,32 +1,32 @@
 <script setup lang="ts">
-//
+import { useOpenAiGlobal } from '@/composables/useOpenAiGlobal';
+
+const toolOutput = useOpenAiGlobal('toolOutput');
 </script>
 
 <template>
-    <div class="relative max-lg:row-start-1">
-        <div class="absolute inset-px overflow-hidden rounded-lg bg-gray-800" />
-        <div class="relative flex h-full flex-col overflow-hidden">
-            <div class="px-8 pt-8 sm:px-10 sm:pt-10">
-                <p
-                    class="mt-2 text-lg font-medium tracking-tight text-white max-lg:text-center"
-                >
-                    Performance
-                </p>
-                <p
-                    class="mt-2 max-w-lg text-sm/6 text-gray-400 max-lg:text-center"
-                >
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit
-                    maiores impedit.
-                </p>
-            </div>
+    <div class="bg-white p-1 dark:bg-gray-900" v-if="toolOutput?.stats?.length">
+        <div class="mx-auto max-w-7xl">
             <div
-                class="flex flex-1 items-center justify-center px-8 max-lg:pt-10 max-lg:pb-12 sm:px-10 lg:pb-2"
+                class="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-gray-900/5 bg-gray-900/5 shadow-sm sm:grid-cols-2 md:grid-cols-4 dark:border-white/10 dark:bg-white/10"
             >
-                <img
-                    class="w-full max-lg:max-w-xs"
-                    src="https://tailwindcss.com/plus-assets/img/component-images/dark-bento-03-performance.png"
-                    alt=""
-                />
+                <div
+                    class="bg-white px-4 py-6 sm:px-6 lg:px-8 dark:bg-gray-950/25"
+                    v-for="stat in toolOutput.stats"
+                    :key="stat.id"
+                >
+                    <p
+                        class="text-sm/6 font-medium text-gray-500 dark:text-gray-400"
+                    >
+                        {{ stat.name }}
+                    </p>
+                    <p class="mt-2 flex items-baseline gap-x-2">
+                        <span
+                            class="text-4xl font-semibold tracking-tight text-gray-900 dark:text-white"
+                            >{{ stat.value }}</span
+                        >
+                    </p>
+                </div>
             </div>
         </div>
     </div>

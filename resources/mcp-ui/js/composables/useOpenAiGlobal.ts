@@ -1,7 +1,7 @@
 import { ref, readonly, onMounted, onUnmounted, type Ref } from "vue";
 import {
     SET_GLOBALS_EVENT_TYPE,
-    type SetGlobalsEvent,
+    SetGlobalsEvent,
     type OpenAiGlobals,
 } from "@/types/openai";
 
