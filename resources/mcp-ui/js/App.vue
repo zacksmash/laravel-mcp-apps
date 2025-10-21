@@ -1,14 +1,21 @@
 <script setup>
-import { SET_GLOBALS_EVENT_TYPE } from './types/openai';
-import PerformanceView from '@/pages/PerformanceView.vue';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { SET_GLOBALS_EVENT_TYPE } from './types/openai';
 
+const router = useRouter();
 const appDidLoad = ref(import.meta.env.PROD ? false : true);
+
+if (!import.meta.env.PROD) {
+    router.push({ name: 'performance' });
+}
+
 window.addEventListener(SET_GLOBALS_EVENT_TYPE, () => {
     appDidLoad.value = true;
+    router.push({ name: 'performance' });
 });
 </script>
 
 <template>
-    <PerformanceView v-if="appDidLoad" />
+    <RouterView v-if="appDidLoad" />
 </template>

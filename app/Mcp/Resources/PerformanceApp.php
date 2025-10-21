@@ -2,7 +2,6 @@
 
 namespace App\Mcp\Resources;
 
-use Laravel\Mcp\Request;
 use Laravel\Mcp\Response;
 use Laravel\Mcp\Server\Resource;
 
@@ -28,16 +27,15 @@ class PerformanceApp extends Resource
      */
     public function handle(): Response|array
     {
-        return Response::app(meta: [
-            // 'openai/widgetDescription' => '',
-            'openai/widgetPrefersBorder' => true,
-            // 'openai/widgetCSP' => '',
-            // 'openai/widgetDomain' => '',
-        ]);
+        return Response::app(
+            fn ($app) => $app
+                ->prefersBorder()
+                ->widgetDescription('A performance monitoring application.')
+        );
     }
 
     public static function template()
     {
-        return (new self)->uri;
+        return (new static)->uri();
     }
 }

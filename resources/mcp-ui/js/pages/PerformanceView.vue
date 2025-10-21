@@ -2,6 +2,8 @@
 import { useOpenAiGlobal } from '@/composables/useOpenAiGlobal';
 
 const toolOutput = useOpenAiGlobal('toolOutput');
+
+console.log(window.openai);
 </script>
 
 <template>
