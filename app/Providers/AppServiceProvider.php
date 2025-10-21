@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
         );
 
         Passport::tokensCan([
-            'mcp:use' => 'Use the Weather MCP',
+            'mcp:use' => 'Use the MCP Server API',
         ]);
 
         Response::macro('app', function (?callable $callback = null, ?string $view = null) {
