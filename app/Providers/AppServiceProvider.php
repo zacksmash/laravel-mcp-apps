@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Inertia\Inertia;
 use Laravel\Mcp\Response;
 use Laravel\Passport\Passport;
 
@@ -21,9 +22,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Passport::authorizationView(function ($parameters) {
-            return view('mcp.authorize', $parameters);
-        });
+        Passport::authorizationView(
+            fn ($parameters) => Inertia::render('auth/OAuthAuthorize', [
+                'request' => $parameters['request'],
+                'authToken' => $parameters['authToken'],
+                'client' => $parameters['client'],
+                'user' => $parameters['user'],
+                'scopes' => $parameters['scopes'],
+            ])
+        );
 
         Passport::tokensCan([
             'mcp:use' => 'Use the Weather MCP',
