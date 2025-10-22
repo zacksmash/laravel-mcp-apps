@@ -6,6 +6,7 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import { Form, Head } from '@inertiajs/vue3';
 import { LoaderCircle, X } from 'lucide-vue-next';
+import { ref } from 'vue';
 
 const props = defineProps<{
     request: any;
@@ -14,6 +15,8 @@ const props = defineProps<{
     user: any;
     scopes: Array<{ id: string; description: string }>;
 }>();
+
+const processing = ref(false);
 </script>
 
 <template>
@@ -81,9 +84,9 @@ const props = defineProps<{
                     </Button>
                 </Form>
 
-                <Form
-                    v-slot="{ processing }"
-                    v-bind="ApproveAuthorizationController.approve.form()"
+                <form
+                    method="POST"
+                    :action="ApproveAuthorizationController.approve.url()"
                     class="flex-1"
                 >
                     <input type="hidden" name="state" value="" />
@@ -97,14 +100,18 @@ const props = defineProps<{
                         name="auth_token"
                         :value="props.authToken"
                     />
-                    <Button :disabled="processing" class="w-full">
+                    <Button
+                        :disabled="processing"
+                        class="w-full"
+                        @click="processing = true"
+                    >
                         Authorize
                         <LoaderCircle
                             v-if="processing"
                             class="mr-3 -ml-1 size-4 animate-spin text-white"
                         />
                     </Button>
-                </Form>
+                </form>
             </CardFooter>
         </Card>
     </AuthLayout>
