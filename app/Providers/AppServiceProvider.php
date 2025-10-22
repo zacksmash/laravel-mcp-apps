@@ -29,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
                 'client' => $parameters['client'],
                 'user' => $parameters['user'],
                 'scopes' => $parameters['scopes'],
+                'csrfToken' => csrf_token(),
             ])
         );
 

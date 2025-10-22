@@ -14,6 +14,7 @@ const props = defineProps<{
     client: any;
     user: any;
     scopes: Array<{ id: string; description: string }>;
+    csrfToken: string;
 }>();
 
 const processing = ref(false);
@@ -90,6 +91,11 @@ const processing = ref(false);
                     :action="ApproveAuthorizationController.approve.url()"
                     class="flex-1"
                 >
+                    <input
+                        type="hidden"
+                        name="_token"
+                        :value="props.csrfToken"
+                    />
                     <input type="hidden" name="state" value="" />
                     <input
                         type="hidden"
@@ -101,7 +107,7 @@ const processing = ref(false);
                         name="auth_token"
                         :value="props.authToken"
                     />
-                    <Button :disabled="processing" class="w-full" type="submit">
+                    <Button :disabled="processing" class="w-full">
                         Authorize
                         <LoaderCircle
                             v-if="processing"
