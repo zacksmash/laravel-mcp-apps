@@ -55,9 +55,9 @@ onMounted(() => {
                     Reset State
                 </button>
 
-                <pre>
-                    {{ widgetState }}
-                </pre>
+                <h1 v-if="widgetState?.something === 'everything'">
+                    This is everything!
+                </h1>
             </div>
         </div>
     </div>
