@@ -85,6 +85,7 @@ const processing = ref(false);
                 </Form>
 
                 <form
+                    @submit="processing = true"
                     method="POST"
                     :action="ApproveAuthorizationController.approve.url()"
                     class="flex-1"
@@ -100,11 +101,7 @@ const processing = ref(false);
                         name="auth_token"
                         :value="props.authToken"
                     />
-                    <Button
-                        :disabled="processing"
-                        class="w-full"
-                        @click="processing = true"
-                    >
+                    <Button :disabled="processing" class="w-full" type="submit">
                         Authorize
                         <LoaderCircle
                             v-if="processing"
