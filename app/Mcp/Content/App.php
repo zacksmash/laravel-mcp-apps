@@ -2,6 +2,7 @@
 
 namespace App\Mcp\Content;
 
+use App\Enums\OpenAI;
 use Laravel\Mcp\Server\Contracts\Content;
 use Laravel\Mcp\Server\Prompt;
 use Laravel\Mcp\Server\Resource;
@@ -13,9 +14,7 @@ class App implements Content
 
     public function __construct(
         protected string $text,
-    ) {
-        //
-    }
+    ) {}
 
     /**
      * @return array<string, mixed>
@@ -42,28 +41,28 @@ class App implements Content
 
     public function prefersBorder(bool $value = true): self
     {
-        $this->meta['openai/widgetPrefersBorder'] = $value;
+        $this->meta[OpenAI::WIDGET_PREFERS_BORDER->value] = $value;
 
         return $this;
     }
 
     public function widgetDescription(string $value): self
     {
-        $this->meta['openai/widgetDescription'] = $value;
+        $this->meta[OpenAI::WIDGET_DESCRIPTION->value] = $value;
 
         return $this;
     }
 
     public function widgetCSP(string $value): self
     {
-        $this->meta['openai/widgetCSP'] = $value;
+        $this->meta[OpenAI::WIDGET_CSP->value] = $value;
 
         return $this;
     }
 
     public function widgetDomain(string $value): self
     {
-        $this->meta['openai/widgetDomain'] = $value;
+        $this->meta[OpenAI::WIDGET_DOMAIN->value] = $value;
 
         return $this;
     }

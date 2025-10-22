@@ -2,6 +2,7 @@
 
 namespace App\Mcp\Tools;
 
+use App\Enums\OpenAI;
 use App\Mcp\Resources\PerformanceApp;
 use Illuminate\JsonSchema\JsonSchema;
 use Laravel\Mcp\Request;
@@ -39,13 +40,6 @@ class PerformanceTool extends Tool
         ];
     }
 
-    public function meta(): array
-    {
-        return [
-            'route' => 'about',
-        ];
-    }
-
     /**
      * Get the tool's input schema.
      *
@@ -64,10 +58,10 @@ class PerformanceTool extends Tool
         return [
             ...parent::toArray(),
             '_meta' => [
-                'openai/outputTemplate' => PerformanceApp::template(),
-                'openai/widgetAccessible' => true,
-                'openai/toolInvocation/invoking' => 'Collecting data from platforms...',
-                'openai/toolInvocation/invoked' => 'Displayed the performance app',
+                OpenAI::OUTPUT_TEMPLATE->value => PerformanceApp::template(),
+                OpenAI::WIDGET_ACCESSIBLE->value => true,
+                OpenAI::TOOL_INVOKING->value => 'Collecting data from platforms...',
+                OpenAI::TOOL_INVOKED->value => 'Displayed the performance app',
             ],
         ];
     }

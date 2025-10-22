@@ -2,6 +2,7 @@
 
 namespace App\Mcp\Resources;
 
+use App\Enums\OpenAI;
 use Laravel\Mcp\Response;
 use Laravel\Mcp\Server\Resource;
 
@@ -11,7 +12,7 @@ class PerformanceApp extends Resource
 
     protected string $title = 'Performance App';
 
-    protected string $mimeType = 'text/html+skybridge';
+    protected string $mimeType = OpenAI::MIME_TYPE->value;
 
     protected string $uri = 'ui://apps/performance';
 
