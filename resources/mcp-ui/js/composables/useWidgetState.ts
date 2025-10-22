@@ -1,5 +1,5 @@
 import { ref, onMounted, onBeforeUnmount, type Ref } from 'vue'
-import { SET_GLOBALS_EVENT_TYPE, type UnknownObject, type SetGlobalsEvent } from '@/types/openai'
+import { SET_GLOBALS_EVENT_TYPE, type UnknownObject, type SetGlobalsEvent } from '@mcp/types/openai'
 
 export function useWidgetState() {
   const widgetState: Ref<UnknownObject | null> = ref<UnknownObject | null>(null)

@@ -1,4 +1,4 @@
-import PerformanceView from '@/pages/PerformanceView.vue'
+import PerformanceView from '@mcp/pages/PerformanceView.vue'
 
 export function useComponent(name: string) {
     const components: Record<string, any> = {

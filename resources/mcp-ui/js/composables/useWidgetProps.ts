@@ -1,4 +1,4 @@
-import { useOpenAiGlobal } from "./useOpenAiGlobal";
+import { useOpenAiGlobal } from "@mcp/composables/useOpenAiGlobal";
 import { type Ref } from "vue";
 
 export function useWidgetProps<T extends Ref<Record<string, unknown>>>(

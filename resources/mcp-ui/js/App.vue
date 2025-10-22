@@ -1,5 +1,5 @@
 <script setup>
-import { useComponent } from '@/composables/useComponent';
+import { useComponent } from '@mcp/composables/useComponent';
 
 const component = useComponent('performance');
 </script>
