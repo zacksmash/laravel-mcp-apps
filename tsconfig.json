@@ -36,14 +36,14 @@
         "paths": {
             /* Specify a set of entries that re-map imports to additional lookup locations. */
             "@/*": ["./resources/js/*"],
-            "@mcp/*": ["./resources/mcp-ui/js/*"]
+            "@mcp/*": ["./resources/mcp-ui/*"],
         },
         // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
         // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */
         "types": [
             "vite/client",
             "./resources/js/types",
-            "./resources/mcp-ui/js/types"
+            "./resources/mcp-ui/types",
         ] /* Specify type package names to be included without being referenced in a source file. */,
         // "allowUmdGlobalAccess": true,                     /* Allow accessing UMD globals from modules. */
         // "moduleSuffixes": [],                             /* List of file name suffixes to search when resolving a module. */
@@ -125,9 +125,9 @@
         "resources/js/**/*.d.ts",
         "resources/js/**/*.tsx",
         "resources/js/**/*.vue",
-        "resources/mcp-ui/js/**/*.ts",
-        "resources/mcp-ui/js/**/*.d.ts",
-        "resources/mcp-ui/js/**/*.tsx",
-        "resources/mcp-ui/js/**/*.vue"
+        "resources/mcp-ui/**/*.ts",
+        "resources/mcp-ui/**/*.d.ts",
+        "resources/mcp-ui/**/*.tsx",
+        "resources/mcp-ui/**/*.vue"
     ]
 }

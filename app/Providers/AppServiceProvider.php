@@ -39,7 +39,7 @@ class AppServiceProvider extends ServiceProvider
 
         Response::macro('app', function (?callable $callback = null, ?string $view = null) {
             $app = new \App\Mcp\Content\App(
-                $view ?? view('mcp.app')->render()
+                trim($view ?? view('mcp.app')->render())
             );
 
             return new static(

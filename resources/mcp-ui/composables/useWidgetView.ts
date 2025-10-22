@@ -1,6 +1,6 @@
-import PerformanceView from '@mcp/pages/PerformanceView.vue'
+import PerformanceView from '@mcp/views/PerformanceView.vue'
 
-export function useComponent(name: string) {
+export function useWidgetView(name: string) {
     const components: Record<string, any> = {
         'performance': PerformanceView
     }

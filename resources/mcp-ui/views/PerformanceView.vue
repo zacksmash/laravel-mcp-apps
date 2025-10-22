@@ -37,10 +37,10 @@ onMounted(() => {
                 </div>
             </div>
 
-            <div class="text-white">
+            <div class="p-4 text-white">
                 <button
                     @click="onUpdateState()"
-                    class="mt-6 ml-6 rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                    class="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                 >
                     Reset State
                 </button>

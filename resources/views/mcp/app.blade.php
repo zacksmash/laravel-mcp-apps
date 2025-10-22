@@ -2,12 +2,12 @@
 @use('Illuminate\Support\Facades\File')
 
 @if(Vite::isRunningHot())
-    @vite(['resources/mcp-ui/js/app.ts'])
+    @vite(['resources/mcp-ui/app.ts'])
 @else
     @php
-        $script = Vite::useBuildDirectory('build/mcp')->content('resources/mcp-ui/js/app.ts');
+        $script = Vite::useBuildDirectory('build/mcp')->content('resources/mcp-ui/app.ts');
         $manifest = File::json(public_path('build/mcp/manifest.json'));
-        $css = File::get(public_path('build/mcp/' . $manifest['resources/mcp-ui/js/app.ts']['css'][0]));
+        $css = File::get(public_path('build/mcp/' . $manifest['resources/mcp-ui/app.ts']['css'][0]));
     @endphp
 
     @if($script)

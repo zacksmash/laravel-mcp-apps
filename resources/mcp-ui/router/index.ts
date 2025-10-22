@@ -1,9 +1,8 @@
 import { createMemoryHistory, createRouter } from 'vue-router'
-
-import AboutView from '@mcp/pages/PerformanceView.vue'
+import PerformanceView from '@mcp/views/PerformanceView.vue'
 
 const routes = [
-  { path: '/performance', component: AboutView, name: 'performance' },
+  { path: '/performance', component: PerformanceView },
 ]
 
 export const router = createRouter({

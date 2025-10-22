@@ -10,7 +10,7 @@ export default defineConfig({
             appendTo: 'app.ts'
         }),
         laravel({
-            input: ['resources/mcp-ui/js/app.ts'],
+            input: ['resources/mcp-ui/app.ts'],
             buildDirectory: 'build/mcp',
             refresh: true,
         }),
@@ -31,7 +31,7 @@ export default defineConfig({
         minify: true,
         copyPublicDir: false,
         rollupOptions: {
-            input: 'resources/mcp-ui/js/app.ts',
+            input: 'resources/mcp-ui/app.ts',
             output: {
                 format: 'es',
                 entryFileNames: 'app-[hash].js',
@@ -42,7 +42,7 @@ export default defineConfig({
 
     resolve: {
         alias: {
-            '@mcp': '/resources/mcp-ui/js',
+            '@mcp': '/resources/mcp-ui/',
         },
     },
 });
