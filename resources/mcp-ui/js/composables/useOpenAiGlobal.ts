@@ -7,7 +7,7 @@ import {
 
 export function useOpenAiGlobal<K extends keyof OpenAiGlobals>(
     key: K
-): Readonly<Ref<OpenAiGlobals[K] | null>> {
+): Ref<OpenAiGlobals[K] | null> {
     const state = ref<OpenAiGlobals[K] | null>(null);
 
     const onChange = () => {
@@ -20,6 +20,8 @@ export function useOpenAiGlobal<K extends keyof OpenAiGlobals>(
         onChange();
 
         handleSetGlobal = (event: SetGlobalsEvent) => {
+            console.log('here');
+
             const value = event.detail?.globals?.[key];
             if (value === undefined) return;
 
