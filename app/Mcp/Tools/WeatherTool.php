@@ -33,6 +33,7 @@ class WeatherTool extends Tool
     public function structuredContent(): array
     {
         return [
+            'user' => auth()->user(),
             'city' => 'San Francisco',
             'date' => now()->format('l M jS, Y'),
             'temp' => [

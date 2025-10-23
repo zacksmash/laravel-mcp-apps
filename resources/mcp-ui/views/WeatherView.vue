@@ -1,34 +1,18 @@
 <script setup lang="ts">
-import { useWidgetParams } from '@mcp/composables/useWidgetParams';
 import { useWidgetProps } from '@mcp/composables/useWidgetProps';
 import { useWidgetState } from '@mcp/composables/useWidgetState';
+import { type WeatherWidgetData, type WeatherWidgetState } from '@mcp/types';
 import { computed } from 'vue';
 
-type WeatherWidgetData = {
-    city: string;
-    date: string;
-    temp: {
-        current: { f: number; c: number };
-        high: { f: number; c: number };
-        low: { f: number; c: number };
-    };
-    conditions: Array<{ label: string; value: string }>;
-};
-
-type WeatherWidgetState = {
-    units: 'c' | 'f';
-};
-
 const toolOutput = useWidgetProps() as WeatherWidgetData;
+
+console.log(window.openai.toolOutput);
+
 const { widgetState, setWidgetState } = useWidgetState<WeatherWidgetState>();
 
 const unit = computed(() => {
     return widgetState.value?.units || 'f';
 });
-
-const params = useWidgetParams();
-
-console.log(params);
 
 const onUpdateState = async (units: 'c' | 'f') => {
     await setWidgetState({ units });
@@ -39,7 +23,7 @@ const onUpdateState = async (units: 'c' | 'f') => {
     <div class="bg-gray-100 p-6">
         <div class="flex items-center justify-center" v-if="toolOutput">
             <div class="flex w-full max-w-xs flex-col rounded bg-white p-4">
-                <div class="text-xl font-bold">{{ params.city }}</div>
+                <div class="text-xl font-bold">{{ toolOutput.city }}</div>
                 <div class="text-sm text-gray-500">
                     {{ toolOutput.date }}
                 </div>
