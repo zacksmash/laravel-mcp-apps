@@ -25,7 +25,9 @@ class WeatherTool extends Tool
      */
     public function handle(Request $request): Response|array
     {
-        return Response::text('Here is the current weather information you requested.');
+        $city = $request->get('city');
+
+        return Response::text("Here is the current weather information you requested for {$city}.");
     }
 
     public function structuredContent(): array
@@ -71,7 +73,9 @@ class WeatherTool extends Tool
      */
     public function schema(JsonSchema $schema): array
     {
-        return [];
+        return [
+            'city' => $schema->string()->description('The city to get the weather for.'),
+        ];
     }
 
     public function meta()

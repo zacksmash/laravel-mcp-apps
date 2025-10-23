@@ -1,26 +1,36 @@
 <script setup lang="ts">
+import { useWidgetParams } from '@mcp/composables/useWidgetParams';
 import { useWidgetProps } from '@mcp/composables/useWidgetProps';
 import { useWidgetState } from '@mcp/composables/useWidgetState';
-import { Ref } from 'vue';
+import { computed } from 'vue';
 
 type WeatherWidgetData = {
     city: string;
     date: string;
     temp: {
-        current: { c: number; f: number };
-        high: { c: number; f: number };
-        low: { c: number; f: number };
+        current: { f: number; c: number };
+        high: { f: number; c: number };
+        low: { f: number; c: number };
     };
     conditions: Array<{ label: string; value: string }>;
 };
 
-const toolOutput: Ref<WeatherWidgetData> = useWidgetProps();
+type WeatherWidgetState = {
+    units: 'c' | 'f';
+};
 
-type WeatherWidgetState = { units?: 'c' | 'f' };
-
+const toolOutput = useWidgetProps() as WeatherWidgetData;
 const { widgetState, setWidgetState } = useWidgetState<WeatherWidgetState>();
 
-const onUpdateState = async (units: WeatherWidgetState['units']) => {
+const unit = computed(() => {
+    return widgetState.value?.units || 'f';
+});
+
+const params = useWidgetParams();
+
+console.log(params);
+
+const onUpdateState = async (units: 'c' | 'f') => {
     await setWidgetState({ units });
 };
 </script>
@@ -29,7 +39,7 @@ const onUpdateState = async (units: WeatherWidgetState['units']) => {
     <div class="bg-gray-100 p-6">
         <div class="flex items-center justify-center" v-if="toolOutput">
             <div class="flex w-full max-w-xs flex-col rounded bg-white p-4">
-                <div class="text-xl font-bold">{{ toolOutput.city }}</div>
+                <div class="text-xl font-bold">{{ params.city }}</div>
                 <div class="text-sm text-gray-500">
                     {{ toolOutput.date }}
                 </div>
@@ -57,16 +67,16 @@ const onUpdateState = async (units: WeatherWidgetState['units']) => {
                     </div>
                 </div>
                 <div class="flex flex-row items-center justify-center">
-                    <div class="text-6xl font-medium">{{ toolOutput.temp.current[widgetState?.units || 'f'] }}°</div>
+                    <div class="text-6xl font-medium">{{ toolOutput.temp.current[unit] }}°</div>
                     <div class="ml-6 flex flex-col items-center">
                         <div>Cloudy</div>
                         <div class="mt-1">
                             <span class="text-sm"><i class="far fa-long-arrow-up"></i></span>
-                            <span class="text-sm font-light text-gray-500">{{ toolOutput.temp.high[widgetState?.units || 'f'] }}°</span>
+                            <span class="text-sm font-light text-gray-500">{{ toolOutput.temp.high[unit] }}°</span>
                         </div>
                         <div>
                             <span class="text-sm"><i class="far fa-long-arrow-down"></i></span>
-                            <span class="text-sm font-light text-gray-500">{{ toolOutput.temp.low[widgetState?.units || 'f'] }}°</span>
+                            <span class="text-sm font-light text-gray-500">{{ toolOutput.temp.low[unit] }}°</span>
                         </div>
                     </div>
                 </div>

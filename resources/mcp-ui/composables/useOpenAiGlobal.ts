@@ -1,4 +1,4 @@
-import { ref, readonly, onMounted, onUnmounted, type Ref } from "vue";
+import { onMounted, onBeforeUnmount, ref} from "vue";
 import {
     SET_GLOBALS_EVENT_TYPE,
     SetGlobalsEvent,
@@ -7,36 +7,35 @@ import {
 
 export function useOpenAiGlobal<K extends keyof OpenAiGlobals>(
     key: K
-): Ref<OpenAiGlobals[K] | null> {
-    const state = ref<OpenAiGlobals[K] | null>(null);
+): OpenAiGlobals[K] {
+    const state = ref((window.openai as OpenAiGlobals)[key]);
 
     const onChange = () => {
-        state.value = typeof window !== "undefined" ? window.openai?.[key] ?? null : null;
-    };
+        state.value = typeof window !== "undefined" && (window.openai as OpenAiGlobals)[key];
+    }
 
-    let handleSetGlobal: ((e: SetGlobalsEvent) => void) | null = null;
+    let handleSetGlobal: ((event: SetGlobalsEvent) => void) | null = null;
 
     onMounted(() => {
         onChange();
 
         handleSetGlobal = (event: SetGlobalsEvent) => {
-            console.log('here');
-
-            const value = event.detail?.globals?.[key];
-            if (value === undefined) return;
-
-            onChange();
+          const value = event.detail.globals[key];
+          if (value === undefined) return;
+          onChange();
         };
 
-        window.addEventListener(SET_GLOBALS_EVENT_TYPE, handleSetGlobal, { passive: true });
-    });
+        window.addEventListener(SET_GLOBALS_EVENT_TYPE, handleSetGlobal, {
+            passive: true,
+        });
+    })
 
-    onUnmounted(() => {
+    onBeforeUnmount(() => {
         if (handleSetGlobal) {
             window.removeEventListener(SET_GLOBALS_EVENT_TYPE, handleSetGlobal);
             handleSetGlobal = null;
         }
-    });
+    })
 
-    return readonly(state) as Readonly<Ref<OpenAiGlobals[K] | null>>;
+    return state as OpenAiGlobals[K];
 }

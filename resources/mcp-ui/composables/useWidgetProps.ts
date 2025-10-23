@@ -1,7 +1,7 @@
 import { useOpenAiGlobal } from "@mcp/composables/useOpenAiGlobal";
-import { type Ref } from "vue";
+import { ref } from "vue";
 
-export function useWidgetProps<T extends Ref<Record<string, unknown>>>(
+export function useWidgetProps<T extends Record<string, unknown>>(
   defaultState?: T | (() => T)
 ): T {
   const props = useOpenAiGlobal("toolOutput") as T;
@@ -11,5 +11,5 @@ export function useWidgetProps<T extends Ref<Record<string, unknown>>>(
       ? (defaultState as () => T | null)()
       : defaultState ?? null;
 
-  return props ?? fallback;
+  return props.value ? props : ref(fallback) as T;
 }

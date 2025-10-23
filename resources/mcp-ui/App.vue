@@ -1,15 +1,13 @@
 <script setup>
-import { onBeforeMount } from 'vue';
+import { useWidgetMeta } from '@mcp/composables/useWidgetMeta';
+import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { useWidgetMeta } from './composables/useWidgetMeta';
 
 const router = useRouter();
-const toolMeta = useWidgetMeta({
-    route: '/weather',
-});
+const meta = useWidgetMeta();
 
-onBeforeMount(() => {
-    router.push(toolMeta.value.route);
+onMounted(() => {
+    router.push(meta.value?.route);
 });
 </script>
 

@@ -1,9 +1,15 @@
 import { useOpenAiGlobal } from "@mcp/composables/useOpenAiGlobal";
-import { UnknownObject } from "@mcp/types/openai";
-import { type Ref, ref } from "vue";
+import { ref } from "vue";
 
-export const useWidgetMeta = (defaults: UnknownObject | null = null): Ref<UnknownObject | null> => {
-    const meta = useOpenAiGlobal("toolResponseMetadata");
+export function useWidgetMeta<T extends Record<string, unknown>>(
+  defaultState?: T | (() => T)
+): T {
+  const meta = useOpenAiGlobal("toolResponseMetadata") as T;
 
-    return meta?.value ? meta : ref(defaults);
-};
+  const fallback =
+    typeof defaultState === "function"
+      ? (defaultState as () => T | null)()
+      : defaultState ?? null;
+
+  return meta.value ? meta : ref(fallback) as T;
+}

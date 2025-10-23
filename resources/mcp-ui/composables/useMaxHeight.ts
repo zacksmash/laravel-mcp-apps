@@ -1,6 +1,5 @@
 import { useOpenAiGlobal } from "@mcp/composables/useOpenAiGlobal";
-import { type Ref } from "vue";
 
-export const useMaxHeight = (): Ref<number | null> => {
+export const useMaxHeight = (): number | null => {
   return useOpenAiGlobal("maxHeight");
 };
