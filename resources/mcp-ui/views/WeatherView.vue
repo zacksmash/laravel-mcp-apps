@@ -3,7 +3,7 @@ import { useWidgetProps } from '@mcp/composables/useWidgetProps';
 import { useWidgetState } from '@mcp/composables/useWidgetState';
 import { Ref } from 'vue';
 
-type WeatherData = {
+type WeatherWidgetData = {
     city: string;
     date: string;
     temp: {
@@ -14,11 +14,13 @@ type WeatherData = {
     conditions: Array<{ label: string; value: string }>;
 };
 
-const toolOutput: Ref<WeatherData> = useWidgetProps();
+const toolOutput: Ref<WeatherWidgetData> = useWidgetProps();
 
-const { widgetState, setWidgetState } = useWidgetState();
+type WeatherWidgetState = { units?: 'c' | 'f' };
 
-const onUpdateState = async (units: 'c' | 'f') => {
+const { widgetState, setWidgetState } = useWidgetState<WeatherWidgetState>();
+
+const onUpdateState = async (units: WeatherWidgetState['units']) => {
     await setWidgetState({ units });
 };
 </script>
