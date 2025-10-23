@@ -1,5 +1,5 @@
 <script setup>
-import { useWidgetMeta } from '@mcp/composables/useWidgetMeta';
+import { useWidgetMeta } from '@mcp/composables/useOpenAiApp';
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -7,7 +7,7 @@ const router = useRouter();
 const meta = useWidgetMeta();
 
 onMounted(() => {
-    router.push(meta.value?.route);
+    router.push({ name: meta.value?.route });
 });
 </script>
 

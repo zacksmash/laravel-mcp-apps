@@ -1,11 +1,8 @@
-import '@mcp/app.css'
+import '@mcp/app.css';
 
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
-import { router } from '@mcp/router'
-import App from '@mcp/App.vue'
+import App from '@mcp/App.vue';
+import { router } from '@mcp/router';
+import { createPinia } from 'pinia';
+import { createApp } from 'vue';
 
-export const app = createApp(App)
-    .use(router)
-    .use(createPinia())
-    .mount('#app');
+export const app = createApp(App).use(router).use(createPinia()).mount('#app');

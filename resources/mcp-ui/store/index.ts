@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia'
-import { User } from '@mcp/types'
+import { User } from '@mcp/types';
+import { defineStore } from 'pinia';
 
 export const useAppStore = defineStore('app', {
     state: () => ({
@@ -10,4 +10,4 @@ export const useAppStore = defineStore('app', {
             this.user = user;
         },
     },
-})
+});

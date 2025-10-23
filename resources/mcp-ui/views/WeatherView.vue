@@ -1,14 +1,10 @@
 <script setup lang="ts">
-import { useWidgetProps } from '@mcp/composables/useWidgetProps';
-import { useWidgetState } from '@mcp/composables/useWidgetState';
+import { useWidgetProps, useWidgetState } from '@mcp/composables/useOpenAiApp';
 import { type WeatherWidgetData, type WeatherWidgetState } from '@mcp/types';
 import { computed } from 'vue';
 
-const toolOutput = useWidgetProps() as WeatherWidgetData;
-
-console.log(window.openai.toolOutput);
-
 const { widgetState, setWidgetState } = useWidgetState<WeatherWidgetState>();
+const toolOutput = useWidgetProps() as WeatherWidgetData;
 
 const unit = computed(() => {
     return widgetState.value?.units || 'f';
@@ -66,11 +62,17 @@ const onUpdateState = async (units: 'c' | 'f') => {
                 </div>
                 <div class="mt-6 flex flex-row justify-between" v-if="toolOutput.conditions?.length">
                     <div class="flex flex-1 flex-col items-center" v-for="condition in toolOutput.conditions" :key="condition.label">
-                        <div class="text-sm font-medium">{{ condition.label }}</div>
-                        <div class="text-sm text-gray-500">{{ condition.value }}</div>
+                        <div class="text-sm font-medium">
+                            {{ condition.label }}
+                        </div>
+                        <div class="text-sm text-gray-500">
+                            {{ condition.value }}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </template>
+
+// callTool // openExternal // sendFollowUpMessage // sendFollowUpTurn
