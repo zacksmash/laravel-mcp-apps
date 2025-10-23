@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { useWidgetProps, useWidgetState } from '@mcp/composables/useOpenAiApp';
 import { type WeatherWidgetData, type WeatherWidgetState } from '@mcp/types';
-import { computed } from 'vue';
+import { computed, Ref } from 'vue';
 
 const { widgetState, setWidgetState } = useWidgetState<WeatherWidgetState>();
-const toolOutput = useWidgetProps() as WeatherWidgetData;
+const toolOutput = useWidgetProps() as Ref<WeatherWidgetData>;
 
 const unit = computed(() => {
     return widgetState.value?.units || 'f';

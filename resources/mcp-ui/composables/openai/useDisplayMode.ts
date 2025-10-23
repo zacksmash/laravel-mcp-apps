@@ -1,6 +1,7 @@
 import { DisplayMode } from '@mcp/types/openai';
+import { Ref } from 'vue';
 import { useOpenAiGlobal } from './useOpenAiGlobal';
 
-export const useDisplayMode = (): DisplayMode | null => {
+export const useDisplayMode = (): Ref<DisplayMode | null> => {
     return useOpenAiGlobal('displayMode');
 };

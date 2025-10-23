@@ -1,5 +1,6 @@
+import { Ref } from 'vue';
 import { useOpenAiGlobal } from './useOpenAiGlobal';
 
-export const useWidgetParams = <T extends Record<string, unknown>>() => {
+export const useWidgetParams = <T extends Ref<Record<string, unknown>>>() => {
     return useOpenAiGlobal('toolInput') as T;
 };

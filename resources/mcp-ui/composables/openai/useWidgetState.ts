@@ -49,5 +49,8 @@ export function useWidgetState<T extends OpenAiGlobals['widgetState']>() {
         handleSetGlobal = null;
     });
 
-    return { widgetState, setWidgetState };
+    return { widgetState, setWidgetState } as {
+        widgetState: typeof widgetState;
+        setWidgetState: typeof setWidgetState;
+    };
 }
