@@ -1,15 +1,11 @@
-import './app.css'
+import '@mcp/app.css'
+
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { router } from '@mcp/router'
 import App from '@mcp/App.vue'
 
-export function mount(el: HTMLElement, props?: Record<string, unknown>) {
-  createApp(App, props)
+export const app = createApp(App)
     .use(router)
     .use(createPinia())
-    .mount(el)
-}
-
-const el = document.getElementById('app')
-if (el) mount(el)
+    .mount('#app');

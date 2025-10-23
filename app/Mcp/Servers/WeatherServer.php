@@ -5,12 +5,12 @@ namespace App\Mcp\Servers;
 use App\Mcp\Methods\CallTool;
 use Laravel\Mcp\Server;
 
-class PerformanceServer extends Server
+class WeatherServer extends Server
 {
     /**
      * The MCP server's name.
      */
-    protected string $name = 'Performance App Server';
+    protected string $name = 'Weather Server';
 
     /**
      * The MCP server's version.
@@ -21,15 +21,15 @@ class PerformanceServer extends Server
      * The MCP server's instructions for the LLM.
      */
     protected string $instructions = <<<'MARKDOWN'
-        This server provides tools that allow users to get current platform performance statistics.
+        You are a Weather Information Provider MCP Server. Your purpose is to provide weather-related data and insights through the available tools and resources.
 
         Available Tools
         -----------------
-        - GetPerformanceTool: Get current platform performance statistics.
+        - GetWeatherTool: Get current weather information.
 
         Available Resources
         --------------------
-        - PerformanceApp: A simple performance app template built with Tailwind CSS and Blade.
+        - WeatherApp: A simple weather MCP UI template.
     MARKDOWN;
 
     /**
@@ -38,7 +38,7 @@ class PerformanceServer extends Server
      * @var array<int, class-string<\Laravel\Mcp\Server\Tool>>
      */
     protected array $tools = [
-        \App\Mcp\Tools\PerformanceTool::class,
+        \App\Mcp\Tools\WeatherTool::class,
     ];
 
     /**
@@ -47,7 +47,7 @@ class PerformanceServer extends Server
      * @var array<int, class-string<\Laravel\Mcp\Server\Resource>>
      */
     protected array $resources = [
-        \App\Mcp\Resources\PerformanceApp::class,
+        \App\Mcp\Resources\WeatherAppResource::class,
     ];
 
     /**

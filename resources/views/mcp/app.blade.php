@@ -3,19 +3,14 @@
 
 @if(Vite::isRunningHot())
     @vite(['resources/mcp-ui/app.ts'])
+    <div id="app"></div>
 @else
     @php
         $script = Vite::useBuildDirectory('build/mcp')->content('resources/mcp-ui/app.ts');
         $manifest = File::json(public_path('build/mcp/manifest.json'));
         $css = File::get(public_path('build/mcp/' . $manifest['resources/mcp-ui/app.ts']['css'][0]));
     @endphp
-
-    @if($script)
-        <script type="module">{!! $script !!}</script>
-    @endif
-
-    @if($css)
-        <style>{!! $css !!}</style>
-    @endif
+    <div id="app"></div>
+    @if($css)<style>{!! $css !!}</style>@endif
+    @if($script)<script type="module">{!! $script !!}</script>@endif
 @endif
-<div id="app"></div>

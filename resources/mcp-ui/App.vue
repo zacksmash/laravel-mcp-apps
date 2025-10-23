@@ -1,9 +1,18 @@
 <script setup>
-import { useWidgetView } from '@mcp/composables/useWidgetView';
+import { onBeforeMount } from 'vue';
+import { useRouter } from 'vue-router';
+import { useWidgetMeta } from './composables/useWidgetMeta';
 
-const component = useWidgetView('performance');
+const router = useRouter();
+const toolMeta = useWidgetMeta({
+    route: '/weather',
+});
+
+onBeforeMount(() => {
+    router.push(toolMeta.value.route);
+});
 </script>
 
 <template>
-    <component :is="component" />
+    <router-view />
 </template>

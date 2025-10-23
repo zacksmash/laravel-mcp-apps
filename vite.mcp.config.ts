@@ -11,7 +11,6 @@ export default defineConfig({
         }),
         laravel({
             input: ['resources/mcp-ui/app.ts'],
-            buildDirectory: 'build/mcp',
             refresh: true,
         }),
         tailwindcss(),

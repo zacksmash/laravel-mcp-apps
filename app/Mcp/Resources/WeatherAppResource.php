@@ -6,21 +6,21 @@ use App\Enums\OpenAI;
 use Laravel\Mcp\Response;
 use Laravel\Mcp\Server\Resource;
 
-class PerformanceApp extends Resource
+class WeatherAppResource extends Resource
 {
-    protected string $name = 'performance-app';
+    protected string $name = 'weather-app';
 
-    protected string $title = 'Performance App';
+    protected string $title = 'Weather App';
 
     protected string $mimeType = OpenAI::MIME_TYPE->value;
 
-    protected string $uri = 'ui://apps/performance';
+    protected string $uri = 'ui://apps/weather';
 
     /**
      * The resource's description.
      */
     protected string $description = <<<'MARKDOWN'
-        A simple performance app template built with Tailwind CSS and Blade.
+        A simple weather MCP UI template.
     MARKDOWN;
 
     /**
@@ -28,11 +28,7 @@ class PerformanceApp extends Resource
      */
     public function handle(): Response|array
     {
-        return Response::app(
-            fn ($app) => $app
-                ->prefersBorder()
-                ->widgetDescription('A performance monitoring application.')
-        );
+        return Response::app();
     }
 
     public static function template()
