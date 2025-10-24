@@ -28,9 +28,19 @@ class WeatherAppResource extends Resource
      */
     public function handle(): Response|array
     {
+        /**
+         * @custom
+         * This is a custom macro to provide meta information for the UI.
+         * This may be deprecated in the future in favor of a more standardized approach.
+         */
         return Response::app();
     }
 
+    /**
+     * @custom
+     * This is a custom method to provide the template URI for the UI.
+     * This may be deprecated in the future in favor of a more standardized approach.
+     */
     public static function template()
     {
         return (new static)->uri();

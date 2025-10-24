@@ -25,11 +25,11 @@ class WeatherServer extends Server
 
         Available Tools
         -----------------
-        - GetWeatherTool: Get current weather information.
+        - WeatherTool: Get current weather information.
 
         Available Resources
         --------------------
-        - WeatherApp: A simple weather MCP UI template.
+        - WeatherAppResource: A simple weather MCP UI template.
     MARKDOWN;
 
     /**
@@ -62,7 +62,8 @@ class WeatherServer extends Server
     protected function boot(): void
     {
         /**
-         * @override Method for tools/call
+         * @override
+         * Method for tools/call
          */
         $this->addMethod('tools/call', CallTool::class);
     }

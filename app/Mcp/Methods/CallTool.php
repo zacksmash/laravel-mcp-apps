@@ -18,7 +18,7 @@ class CallTool extends McpCallTool
             '_meta' => method_exists($tool, 'meta')
                 ? $tool->meta()
                 : null,
-            'structuredContent' => \method_exists($tool, 'structuredContent')
+            'structuredContent' => method_exists($tool, 'structuredContent')
                 ? $tool->structuredContent()
                 : null,
             'content' => $responses->map(fn (Response $response): array => $response->content()->toTool($tool))->all(),

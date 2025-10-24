@@ -1,10 +1,10 @@
-<script setup>
+<script setup lang="ts">
 import { useWidgetMeta } from '@mcp/composables/useOpenAiApp';
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
-const meta = useWidgetMeta();
+const meta = useWidgetMeta() as any;
 
 onMounted(() => {
     router.push({ name: meta.value?.route });

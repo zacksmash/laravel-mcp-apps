@@ -30,6 +30,23 @@ class WeatherTool extends Tool
         return Response::text("Here is the current weather information you requested for {$city}.");
     }
 
+    /**
+     * Get the tool's input schema.
+     *
+     * @return array<string, \Illuminate\JsonSchema\JsonSchema>
+     */
+    public function schema(JsonSchema $schema): array
+    {
+        return [
+            'city' => $schema->string()->description('The city to get the weather for.'),
+        ];
+    }
+
+    /**
+     * @custom
+     * This is a custom method to provide meta information for the UI.
+     * This may be deprecated in the future in favor of a more standardized approach.
+     */
     public function structuredContent(): array
     {
         return [
@@ -68,17 +85,10 @@ class WeatherTool extends Tool
     }
 
     /**
-     * Get the tool's input schema.
-     *
-     * @return array<string, \Illuminate\JsonSchema\JsonSchema>
+     * @custom
+     * This is a custom method to provide meta information for the UI.
+     * This may be deprecated in the future in favor of a more standardized approach.
      */
-    public function schema(JsonSchema $schema): array
-    {
-        return [
-            'city' => $schema->string()->description('The city to get the weather for.'),
-        ];
-    }
-
     public function meta()
     {
         return [
@@ -87,7 +97,8 @@ class WeatherTool extends Tool
     }
 
     /**
-     * @override Get the tool array representation.
+     * @override
+     * Get the tool array representation.
      */
     public function toArray(): array
     {

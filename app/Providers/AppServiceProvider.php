@@ -37,6 +37,11 @@ class AppServiceProvider extends ServiceProvider
             'mcp:use' => 'Use the MCP Server API',
         ]);
 
+        /**
+         * @custom
+         * This is a custom macro to provide meta information for the UI.
+         * This may be deprecated in the future in favor of a more standardized approach.
+         */
         Response::macro('app', function (?callable $callback = null, ?string $view = null) {
             $app = new \App\Mcp\Content\App(
                 trim($view ?? view('mcp.app')->render())
