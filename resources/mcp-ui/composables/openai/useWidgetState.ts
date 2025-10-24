@@ -1,16 +1,9 @@
-import { SET_GLOBALS_EVENT_TYPE, SetGlobalsEvent, type OpenAiGlobals, type UnknownObject } from '@mcp/types/openai';
-import { onBeforeUnmount, onMounted, ref } from 'vue';
+import { type OpenAiGlobals, type UnknownObject } from '@mcp/types/openai';
+import { Ref } from 'vue';
+import { useOpenAiGlobal } from './useOpenAiGlobal';
 
 export function useWidgetState<T extends OpenAiGlobals['widgetState']>() {
-    const widgetState = ref((window.openai as OpenAiGlobals)['widgetState'] as T | null);
-
-    const onChange = () => {
-        if (typeof window !== 'undefined' && window.openai) {
-            widgetState.value = window.openai.widgetState as T | null;
-        }
-    };
-
-    let handleSetGlobal: ((e: SetGlobalsEvent) => void) | null = null;
+    const widgetState = useOpenAiGlobal('widgetState') as Ref<T | null>;
 
     async function setWidgetState(next: T | ((prev: T | null) => T)): Promise<void> {
         if (typeof window === 'undefined' || !window.openai?.setWidgetState) return;
@@ -25,29 +18,6 @@ export function useWidgetState<T extends OpenAiGlobals['widgetState']>() {
             console.error('setWidgetState failed', err);
         }
     }
-
-    onMounted(() => {
-        if (typeof window === 'undefined') return;
-
-        onChange();
-
-        handleSetGlobal = (event: SetGlobalsEvent) => {
-            const globals = event.detail?.globals;
-            if (globals && 'widgetState' in globals) {
-                widgetState.value = globals.widgetState as T | null;
-            }
-        };
-
-        window.addEventListener(SET_GLOBALS_EVENT_TYPE, handleSetGlobal, {
-            passive: true,
-        });
-    });
-
-    onBeforeUnmount(() => {
-        if (typeof window === 'undefined' || !handleSetGlobal) return;
-        window.removeEventListener(SET_GLOBALS_EVENT_TYPE, handleSetGlobal);
-        handleSetGlobal = null;
-    });
 
     return { widgetState, setWidgetState } as {
         widgetState: typeof widgetState;

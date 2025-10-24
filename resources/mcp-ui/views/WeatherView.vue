@@ -74,5 +74,3 @@ const onUpdateState = async (units: 'c' | 'f') => {
         </div>
     </div>
 </template>
-
-// callTool // openExternal // sendFollowUpMessage // sendFollowUpTurn
