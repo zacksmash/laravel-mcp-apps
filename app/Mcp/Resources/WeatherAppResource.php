@@ -3,6 +3,7 @@
 namespace App\Mcp\Resources;
 
 use App\Enums\OpenAI;
+use App\Mcp\Content\App;
 use Laravel\Mcp\Response;
 use Laravel\Mcp\Server\Resource;
 
@@ -33,7 +34,7 @@ class WeatherAppResource extends Resource
          * This is a custom macro to provide meta information for the UI.
          * This may be deprecated in the future in favor of a more standardized approach.
          */
-        return Response::app();
+        return Response::app(fn (App $app) => $app->prefersBorder());
     }
 
     /**
