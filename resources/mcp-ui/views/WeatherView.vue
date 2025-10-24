@@ -1,13 +1,15 @@
 <script setup lang="ts">
-import { useCallTool, useOpenExternal, useSendFollowUpMessage, useWidgetProps, useWidgetState } from '@mcp/composables/openai';
+import { useCallTool, useOpenExternal, useRequestDisplayMode, useSendFollowUpMessage, useWidgetProps, useWidgetState } from '@mcp/composables/openai';
 import { type WeatherWidgetData, type WeatherWidgetState } from '@mcp/types';
-import { computed, Ref } from 'vue';
+import { computed, Ref, ref } from 'vue';
 
 const { widgetState, setWidgetState } = useWidgetState<WeatherWidgetState>();
 const toolOutput = useWidgetProps() as Ref<WeatherWidgetData>;
 const callTool = useCallTool();
 const openExternal = useOpenExternal();
 const sendFollowUpMessage = useSendFollowUpMessage();
+const requestDisplayMode = useRequestDisplayMode();
+const isLoading = ref(false);
 
 const unit = computed(() => {
     return widgetState.value?.units || 'f';
@@ -18,21 +20,27 @@ const onUpdateState = async (units: 'c' | 'f') => {
 };
 
 const onSendFollowup = async () => {
-    await sendFollowUpMessage({ prompt: 'User clicked the weather action button.' });
+    await sendFollowUpMessage('What is dark matter anyway?');
 };
 
-const onOpenExternal = async () => {
-    await openExternal({ href: 'https://www.weather.com/' });
+const onOpenExternal = () => {
+    openExternal('https://www.weather.com/');
 };
 
 const onCallTool = async () => {
-    const res = (await callTool('update-weather-tool', {})) as any;
+    isLoading.value = true;
+    const res = (await callTool('update-weather-tool', { city: 'Denver' })) as any;
 
     if (res?.isError) {
         throw new Error('Error calling tool:', res?.error || 'Unknown error occurred');
     }
 
+    isLoading.value = false;
     toolOutput.value = res?.structuredContent as WeatherWidgetData;
+};
+
+const onRequestDisplayMode = async () => {
+    await requestDisplayMode('fullscreen');
 };
 
 const onGetWindowObject = () => {
@@ -42,65 +50,68 @@ const onGetWindowObject = () => {
 
 <template>
     <div>
-        <div class="flex">
-            <div class="flex w-full max-w-xs flex-col rounded bg-white p-4">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <div class="text-xl font-bold">{{ toolOutput.city }}</div>
-                        <div class="text-sm text-gray-500">
-                            {{ toolOutput.date }}
-                        </div>
-                    </div>
-                </div>
-                <div class="my-6 flex items-center justify-around">
-                    <div class="flex flex-col items-center justify-center rounded-md bg-gray-100 p-1 font-bold">
-                        <button
-                            @click="onUpdateState('f')"
-                            :class="['rounded-sm px-3 py-2 transition-colors', widgetState?.units === 'f' || !widgetState ? 'bg-white text-sky-500' : '']"
-                        >
-                            F°
-                        </button>
-                        <button @click="onUpdateState('c')" :class="['rounded-sm px-3 py-2 transition-colors', widgetState?.units === 'c' ? 'bg-white text-sky-500' : '']">
-                            C°
-                        </button>
-                    </div>
-                    <div class="inline-flex size-24 items-center justify-center self-center rounded-lg text-6xl text-sky-500">
-                        <svg class="size-24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"
-                            ></path>
-                        </svg>
-                    </div>
-                </div>
-                <div class="flex flex-row items-center justify-center">
-                    <div class="text-6xl font-medium">{{ toolOutput.temp.current[unit] }}°</div>
-                    <div class="ml-6 flex flex-col items-center">
-                        <div>Cloudy</div>
-                        <div class="mt-1">
-                            <span class="text-sm"><i class="far fa-long-arrow-up"></i></span>
-                            <span class="text-sm font-light text-gray-500">{{ toolOutput.temp.high[unit] }}°</span>
-                        </div>
+        <div class="flex" v-if="toolOutput">
+            <div class="flex w-full max-w-xs flex-col bg-white p-4">
+                <template v-if="!isLoading">
+                    <div class="flex items-center justify-between">
                         <div>
-                            <span class="text-sm"><i class="far fa-long-arrow-down"></i></span>
-                            <span class="text-sm font-light text-gray-500">{{ toolOutput.temp.low[unit] }}°</span>
+                            <div class="text-xl font-bold">{{ toolOutput.city }}</div>
+                            <div class="text-sm text-gray-500">
+                                {{ toolOutput.date }}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="mt-6 flex flex-row justify-between" v-if="toolOutput.conditions?.length">
-                    <div class="flex flex-1 flex-col items-center" v-for="condition in toolOutput.conditions" :key="condition.label">
-                        <div class="text-sm font-medium">
-                            {{ condition.label }}
+                    <div class="my-6 flex items-center justify-around">
+                        <div class="flex flex-col items-center justify-center rounded-md bg-gray-100 p-1 font-bold">
+                            <button
+                                @click="onUpdateState('f')"
+                                :class="['rounded-sm px-3 py-2 transition-colors', widgetState?.units === 'f' || !widgetState ? 'bg-white text-sky-500' : '']"
+                            >
+                                F°
+                            </button>
+                            <button @click="onUpdateState('c')" :class="['rounded-sm px-3 py-2 transition-colors', widgetState?.units === 'c' ? 'bg-white text-sky-500' : '']">
+                                C°
+                            </button>
                         </div>
-                        <div class="text-sm text-gray-500">
-                            {{ condition.value }}
+                        <div class="inline-flex size-24 items-center justify-center self-center rounded-lg text-6xl text-sky-500">
+                            <svg class="size-24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"
+                                ></path>
+                            </svg>
                         </div>
                     </div>
-                </div>
+                    <div class="flex flex-row items-center justify-center">
+                        <div class="text-6xl font-medium">{{ toolOutput.temp.current[unit] }}°</div>
+                        <div class="ml-6 flex flex-col items-center">
+                            <div>Cloudy</div>
+                            <div class="mt-1">
+                                <span class="text-sm"><i class="far fa-long-arrow-up"></i></span>
+                                <span class="text-sm font-light text-gray-500">{{ toolOutput.temp.high[unit] }}°</span>
+                            </div>
+                            <div>
+                                <span class="text-sm"><i class="far fa-long-arrow-down"></i></span>
+                                <span class="text-sm font-light text-gray-500">{{ toolOutput.temp.low[unit] }}°</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 flex flex-row justify-between" v-if="toolOutput.conditions?.length">
+                        <div class="flex flex-1 flex-col items-center" v-for="condition in toolOutput.conditions" :key="condition.label">
+                            <div class="text-sm font-medium">
+                                {{ condition.label }}
+                            </div>
+                            <div class="text-sm text-gray-500">
+                                {{ condition.value }}
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <template v-else> Fetching weather... </template>
             </div>
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col justify-center gap-2 bg-white p-4">
                 <button
                     @click="onSendFollowup"
                     class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-gray-50"
@@ -123,6 +134,13 @@ const onGetWindowObject = () => {
                 </button>
 
                 <button
+                    @click="onRequestDisplayMode"
+                    class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-gray-50"
+                >
+                    Display Mode
+                </button>
+
+                <button
                     @click="onGetWindowObject"
                     class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-gray-50"
                 >
@@ -130,5 +148,7 @@ const onGetWindowObject = () => {
                 </button>
             </div>
         </div>
+
+        <div v-else>Loading weather widget...</div>
     </div>
 </template>

@@ -13,6 +13,8 @@ use Laravel\Mcp\Server\Tools\Annotations\IsReadOnly;
 #[IsReadOnly()]
 class WeatherTool extends Tool
 {
+    protected $structured_content;
+
     /**
      * The tool's description.
      */
@@ -27,31 +29,16 @@ class WeatherTool extends Tool
     {
         $city = $request->get('city');
 
+        $this->getContent($request);
+
         return Response::text("Here is the current weather information you requested for {$city}.");
     }
 
-    /**
-     * Get the tool's input schema.
-     *
-     * @return array<string, \Illuminate\JsonSchema\JsonSchema>
-     */
-    public function schema(JsonSchema $schema): array
+    protected function getContent(Request $request): void
     {
-        return [
-            'city' => $schema->string()->description('The city to get the weather for.'),
-        ];
-    }
-
-    /**
-     * @custom
-     * This is a custom method to provide meta information for the UI.
-     * This may be deprecated in the future in favor of a more standardized approach.
-     */
-    public function structuredContent(): array
-    {
-        return [
+        $this->structured_content = [
             'user' => auth()->user(),
-            'city' => 'San Francisco',
+            'city' => $request->get('city', 'San Francisco'),
             'date' => now()->format('l M jS, Y'),
             'temp' => [
                 'current' => [
@@ -82,6 +69,28 @@ class WeatherTool extends Tool
                 ],
             ],
         ];
+    }
+
+    /**
+     * Get the tool's input schema.
+     *
+     * @return array<string, \Illuminate\JsonSchema\JsonSchema>
+     */
+    public function schema(JsonSchema $schema): array
+    {
+        return [
+            'city' => $schema->string()->description('The city to get the weather for.'),
+        ];
+    }
+
+    /**
+     * @custom
+     * This is a custom method to provide meta information for the UI.
+     * This may be deprecated in the future in favor of a more standardized approach.
+     */
+    public function structuredContent(): ?array
+    {
+        return $this->structured_content;
     }
 
     /**

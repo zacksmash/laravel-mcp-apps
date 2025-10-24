@@ -1,6 +1,6 @@
 export function useSendFollowUpMessage() {
-    const sendFollowUpMessage = async (args: { prompt: string }): Promise<void> => {
-        await window.openai?.sendFollowUpMessage(args);
+    const sendFollowUpMessage = async (prompt: string): Promise<void> => {
+        await window.openai?.sendFollowUpMessage({ prompt });
     };
 
     return sendFollowUpMessage;

@@ -12,12 +12,8 @@ import { useWidgetState } from './useWidgetState';
 
 import { useCallTool } from './useCallTool';
 import { useOpenExternal } from './useOpenExternal';
+import { useRequestDisplayMode } from './useRequestDisplayMode';
 import { useSendFollowUpMessage } from './useSendFollowUpMessage';
-
-// callTool
-// openExternal
-// sendFollowUpMessage
-// sendFollowUpTurn
 
 export {
     useCallTool,
@@ -26,6 +22,7 @@ export {
     useMaxHeight,
     useOpenAiGlobal,
     useOpenExternal,
+    useRequestDisplayMode,
     useSafeArea,
     useSendFollowUpMessage,
     useTheme,
