@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useWidgetProps, useWidgetState } from '@mcp/composables/useOpenAI';
+import { useWidgetProps, useWidgetState } from '@mcp/composables/openai';
 import { type WeatherWidgetData, type WeatherWidgetState } from '@mcp/types';
 import { computed, Ref } from 'vue';
 
