@@ -15,6 +15,10 @@ const unit = computed(() => {
     return widgetState.value?.units || 'f';
 });
 
+const data = computed(() => {
+    return toolOutput.value;
+});
+
 const onUpdateState = async (units: 'c' | 'f') => {
     await setWidgetState({ units });
 };
@@ -55,9 +59,9 @@ const onGetWindowObject = () => {
                 <template v-if="!isLoading">
                     <div class="flex items-center justify-between">
                         <div>
-                            <div class="text-xl font-bold">{{ toolOutput.city }}</div>
+                            <div class="text-xl font-bold">{{ data.city }}</div>
                             <div class="text-sm text-gray-500">
-                                {{ toolOutput.date }}
+                                {{ data.date }}
                             </div>
                         </div>
                     </div>
@@ -85,21 +89,21 @@ const onGetWindowObject = () => {
                         </div>
                     </div>
                     <div class="flex flex-row items-center justify-center">
-                        <div class="text-6xl font-medium">{{ toolOutput.temp.current[unit] }}°</div>
+                        <div class="text-6xl font-medium">{{ data.temp.current[unit] }}°</div>
                         <div class="ml-6 flex flex-col items-center">
                             <div>Cloudy</div>
                             <div class="mt-1">
                                 <span class="text-sm"><i class="far fa-long-arrow-up"></i></span>
-                                <span class="text-sm font-light text-gray-500">{{ toolOutput.temp.high[unit] }}°</span>
+                                <span class="text-sm font-light text-gray-500">{{ data.temp.high[unit] }}°</span>
                             </div>
                             <div>
                                 <span class="text-sm"><i class="far fa-long-arrow-down"></i></span>
-                                <span class="text-sm font-light text-gray-500">{{ toolOutput.temp.low[unit] }}°</span>
+                                <span class="text-sm font-light text-gray-500">{{ data.temp.low[unit] }}°</span>
                             </div>
                         </div>
                     </div>
-                    <div class="mt-6 flex flex-row justify-between" v-if="toolOutput.conditions?.length">
-                        <div class="flex flex-1 flex-col items-center" v-for="condition in toolOutput.conditions" :key="condition.label">
+                    <div class="mt-6 flex flex-row justify-between" v-if="data.conditions?.length">
+                        <div class="flex flex-1 flex-col items-center" v-for="condition in data.conditions" :key="condition.label">
                             <div class="text-sm font-medium">
                                 {{ condition.label }}
                             </div>
