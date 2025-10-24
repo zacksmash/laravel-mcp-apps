@@ -54,7 +54,7 @@ const onGetWindowObject = () => {
 
 <template>
     <div>
-        <div class="flex" v-if="toolOutput">
+        <div class="flex" v-if="data">
             <div class="flex w-full max-w-xs flex-col bg-white p-4">
                 <template v-if="!isLoading">
                     <div class="flex items-center justify-between">

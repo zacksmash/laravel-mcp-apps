@@ -17,7 +17,7 @@ class UpdateWeatherTool extends Tool
      * The tool's description.
      */
     protected string $description = <<<'MARKDOWN'
-    Update the weather widget with the latest weather information based on the specified units (Celsius or Fahrenheit).
+        Update the weather widget with the latest weather information.
     MARKDOWN;
 
     /**
