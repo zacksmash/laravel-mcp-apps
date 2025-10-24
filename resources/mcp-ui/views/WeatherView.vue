@@ -41,7 +41,7 @@ const onGetWindowObject = () => {
 </script>
 
 <template>
-    <div v-if="toolOutput">
+    <div>
         <div class="flex">
             <div class="flex w-full max-w-xs flex-col rounded bg-white p-4">
                 <div class="flex items-center justify-between">
