@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import { useWidgetProps, useWidgetState } from '@mcp/composables/openai';
+import { useCallTool, useOpenExternal, useSendFollowUpMessage, useWidgetProps, useWidgetState } from '@mcp/composables/openai';
 import { type WeatherWidgetData, type WeatherWidgetState } from '@mcp/types';
 import { computed, Ref } from 'vue';
 
 const { widgetState, setWidgetState } = useWidgetState<WeatherWidgetState>();
 const toolOutput = useWidgetProps() as Ref<WeatherWidgetData>;
+const callTool = useCallTool();
+const openExternal = useOpenExternal();
+const sendFollowUpMessage = useSendFollowUpMessage();
 
 const unit = computed(() => {
     return widgetState.value?.units || 'f';
@@ -13,15 +16,41 @@ const unit = computed(() => {
 const onUpdateState = async (units: 'c' | 'f') => {
     await setWidgetState({ units });
 };
+
+const onSendFollowup = async () => {
+    await sendFollowUpMessage({ prompt: 'User clicked the weather action button.' });
+};
+
+const onOpenExternal = async () => {
+    await openExternal({ href: 'https://www.weather.com/' });
+};
+
+const onCallTool = async () => {
+    const res = (await callTool('update-weather-tool', {})) as any;
+
+    if (res?.isError) {
+        throw new Error('Error calling tool:', res?.error || 'Unknown error occurred');
+    }
+
+    toolOutput.value = res?.structuredContent as WeatherWidgetData;
+};
+
+const onGetWindowObject = () => {
+    console.log('window.openai:', window.openai);
+};
 </script>
 
 <template>
-    <div class="bg-gray-100 p-6">
-        <div class="flex items-center justify-center" v-if="toolOutput">
+    <div v-if="toolOutput">
+        <div class="flex">
             <div class="flex w-full max-w-xs flex-col rounded bg-white p-4">
-                <div class="text-xl font-bold">{{ toolOutput.city }}</div>
-                <div class="text-sm text-gray-500">
-                    {{ toolOutput.date }}
+                <div class="flex items-center justify-between">
+                    <div>
+                        <div class="text-xl font-bold">{{ toolOutput.city }}</div>
+                        <div class="text-sm text-gray-500">
+                            {{ toolOutput.date }}
+                        </div>
+                    </div>
                 </div>
                 <div class="my-6 flex items-center justify-around">
                     <div class="flex flex-col items-center justify-center rounded-md bg-gray-100 p-1 font-bold">
@@ -70,6 +99,35 @@ const onUpdateState = async (units: 'c' | 'f') => {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="flex flex-col gap-2">
+                <button
+                    @click="onSendFollowup"
+                    class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-gray-50"
+                >
+                    Follow Up
+                </button>
+
+                <button
+                    @click="onOpenExternal"
+                    class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-gray-50"
+                >
+                    External
+                </button>
+
+                <button
+                    @click="onCallTool"
+                    class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-gray-50"
+                >
+                    Call Tool
+                </button>
+
+                <button
+                    @click="onGetWindowObject"
+                    class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-gray-50"
+                >
+                    Get API
+                </button>
             </div>
         </div>
     </div>

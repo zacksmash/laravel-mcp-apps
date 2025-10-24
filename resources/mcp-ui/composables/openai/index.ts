@@ -10,4 +10,28 @@ import { useWidgetParams } from './useWidgetParams';
 import { useWidgetProps } from './useWidgetProps';
 import { useWidgetState } from './useWidgetState';
 
-export { useDisplayMode, useLocale, useMaxHeight, useOpenAiGlobal, useSafeArea, useTheme, useUserAgent, useWidgetMeta, useWidgetParams, useWidgetProps, useWidgetState };
+import { useCallTool } from './useCallTool';
+import { useOpenExternal } from './useOpenExternal';
+import { useSendFollowUpMessage } from './useSendFollowUpMessage';
+
+// callTool
+// openExternal
+// sendFollowUpMessage
+// sendFollowUpTurn
+
+export {
+    useCallTool,
+    useDisplayMode,
+    useLocale,
+    useMaxHeight,
+    useOpenAiGlobal,
+    useOpenExternal,
+    useSafeArea,
+    useSendFollowUpMessage,
+    useTheme,
+    useUserAgent,
+    useWidgetMeta,
+    useWidgetParams,
+    useWidgetProps,
+    useWidgetState,
+};

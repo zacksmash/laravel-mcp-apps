@@ -26,6 +26,7 @@ class WeatherServer extends Server
         Available Tools
         -----------------
         - WeatherTool: Get current weather information.
+        - UpdateWeatherTool: Update the weather widget with the latest weather information.
 
         Available Resources
         --------------------
@@ -39,6 +40,7 @@ class WeatherServer extends Server
      */
     protected array $tools = [
         \App\Mcp\Tools\WeatherTool::class,
+        \App\Mcp\Tools\UpdateWeatherTool::class,
     ];
 
     /**
