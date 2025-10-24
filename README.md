@@ -6,8 +6,8 @@ Laravel starter for building Model Context Protocol (MCP) Servers and OpenAI-com
 Clone and bootstrap:
 
 ```bash
-git clone https://github.com/zacksmash/mcpauth.git
-cd mcpauth
+git clone https://github.com/zacksmash/laravel-mcp-apps.git
+cd laravel-mcp-apps
 composer setup
 ```
 
