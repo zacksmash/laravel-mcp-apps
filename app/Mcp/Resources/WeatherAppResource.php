@@ -21,7 +21,7 @@ class WeatherAppResource extends Resource
      * The resource's description.
      */
     protected string $description = <<<'MARKDOWN'
-        A simple weather MCP UI template.
+    A simple weather MCP UI template.
     MARKDOWN;
 
     /**

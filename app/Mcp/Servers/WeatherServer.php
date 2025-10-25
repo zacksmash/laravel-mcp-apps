@@ -21,16 +21,16 @@ class WeatherServer extends Server
      * The MCP server's instructions for the LLM.
      */
     protected string $instructions = <<<'MARKDOWN'
-        You are a Weather Information Provider MCP Server. Your purpose is to provide weather-related data and insights through the available tools and resources.
+    You are a Weather Information Provider MCP Server. Your purpose is to provide weather-related data and insights through the available tools and resources.
 
-        Available Tools
-        -----------------
-        - WeatherTool: Get current weather information.
-        - UpdateWeatherTool: Update the weather widget with the latest weather information.
+    Available Tools
+    -----------------
+    - WeatherTool: Get current weather information.
+    - UpdateWeatherTool: Update the weather widget with the latest weather information.
 
-        Available Resources
-        --------------------
-        - WeatherAppResource: A simple weather MCP UI template.
+    Available Resources
+    --------------------
+    - WeatherAppResource: A simple weather MCP UI template.
     MARKDOWN;
 
     /**

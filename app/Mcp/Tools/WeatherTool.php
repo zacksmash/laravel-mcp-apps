@@ -19,7 +19,7 @@ class WeatherTool extends Tool
      * The tool's description.
      */
     protected string $description = <<<'MARKDOWN'
-        This tool provides current weather data and forecasts
+    This tool provides current weather data and forecasts
     MARKDOWN;
 
     /**
