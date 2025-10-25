@@ -6,7 +6,7 @@ export function useCallTool(): CallTool {
         args: Record<string, unknown>,
     ): Promise<CallToolResponse> => {
         try {
-            const result = await window?.openai?.callTool(name, args);
+            const result = await window.openai?.callTool(name, args);
             return result;
         } catch (err) {
             console.error('callTool failed', err);
