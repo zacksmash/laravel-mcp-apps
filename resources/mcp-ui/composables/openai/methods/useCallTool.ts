@@ -1,4 +1,4 @@
-import { CallTool, CallToolResponse } from '@mcp/types/openai';
+import { CallTool, CallToolResponse } from '../types';
 
 export function useCallTool(): CallTool {
     const callTool: CallTool = async (

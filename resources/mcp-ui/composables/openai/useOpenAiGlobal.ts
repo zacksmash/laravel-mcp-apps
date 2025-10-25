@@ -1,9 +1,9 @@
+import { onBeforeUnmount, onMounted, ref, type Ref } from 'vue';
 import {
     SET_GLOBALS_EVENT_TYPE,
     SetGlobalsEvent,
     type OpenAiGlobals,
-} from '@mcp/types/openai';
-import { onBeforeUnmount, onMounted, ref, type Ref } from 'vue';
+} from './types';
 
 export function useOpenAiGlobal<K extends keyof OpenAiGlobals>(
     key: K,

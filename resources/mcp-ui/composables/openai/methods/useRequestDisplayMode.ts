@@ -1,4 +1,4 @@
-import { DisplayMode } from '@mcp/types/openai';
+import { DisplayMode } from '../types';
 
 export function useRequestDisplayMode() {
     const requestDisplayMode = async (mode: DisplayMode): Promise<void> => {

@@ -1,5 +1,5 @@
-import { type OpenAiGlobals, type UnknownObject } from '@mcp/types/openai';
 import { type Ref } from 'vue';
+import { type OpenAiGlobals, type UnknownObject } from '../types';
 import { useOpenAiGlobal } from '../useOpenAiGlobal';
 
 export function useWidgetState<T extends OpenAiGlobals['widgetState']>() {
