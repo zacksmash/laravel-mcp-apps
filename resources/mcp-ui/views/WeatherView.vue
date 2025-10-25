@@ -203,6 +203,8 @@ const onGetWindowObject = () => {
             </div>
         </div>
 
-        <div v-else>Loading weather widget...</div>
+        <div class="text-medium bg-white uppercase" v-else>
+            Loading weather widget...
+        </div>
     </div>
 </template>
