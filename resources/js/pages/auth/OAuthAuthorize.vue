@@ -111,7 +111,7 @@ const processing = ref(false);
                         Authorize
                         <LoaderCircle
                             v-if="processing"
-                            class="mr-3 -ml-1 size-4 animate-spin text-white"
+                            class="mr-3 -ml-1 size-4 animate-spin"
                         />
                     </Button>
                 </form>

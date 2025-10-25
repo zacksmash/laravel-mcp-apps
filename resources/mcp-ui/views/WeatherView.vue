@@ -62,8 +62,11 @@ const onGetWindowObject = () => {
 
 <template>
     <div>
-        <div class="flex" v-if="toolOutput">
-            <div class="flex w-full max-w-xs flex-col bg-white p-4">
+        <div
+            class="flex justify-between overflow-hidden rounded-md bg-white"
+            v-if="toolOutput"
+        >
+            <div class="flex w-full max-w-xs flex-col p-4">
                 <template v-if="!isLoading">
                     <div class="flex items-center justify-between">
                         <div>
@@ -165,7 +168,7 @@ const onGetWindowObject = () => {
                 </template>
                 <template v-else> Fetching weather... </template>
             </div>
-            <div class="flex flex-col justify-center gap-2 bg-white p-4">
+            <div class="flex flex-col justify-center gap-2 p-4">
                 <button
                     @click="onSendFollowup"
                     class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-gray-50"
@@ -203,7 +206,30 @@ const onGetWindowObject = () => {
             </div>
         </div>
 
-        <div class="text-medium bg-white uppercase" v-else>
+        <div
+            class="text-medium flex items-center justify-center gap-2 overflow-hidden rounded-md bg-white px-2 py-12 uppercase"
+            v-else
+        >
+            <svg
+                class="size-5 animate-spin"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+            >
+                <circle
+                    class="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    stroke-width="4"
+                ></circle>
+                <path
+                    class="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+            </svg>
             Loading weather widget...
         </div>
     </div>
