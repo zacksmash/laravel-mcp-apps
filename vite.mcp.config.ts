@@ -1,17 +1,18 @@
 import tailwindcss from '@tailwindcss/vite';
 import vue from '@vitejs/plugin-vue';
 import laravel from 'laravel-vite-plugin';
-import vueDevTools from 'vite-plugin-vue-devtools';
 import { defineConfig } from 'vite';
+import vueDevTools from 'vite-plugin-vue-devtools';
 
 export default defineConfig({
     plugins: [
         vueDevTools({
-            appendTo: 'app.ts'
+            appendTo: 'app.ts',
         }),
         laravel({
             input: ['resources/mcp-ui/app.ts'],
             refresh: true,
+            hotFile: 'public/hot-mcp',
         }),
         tailwindcss(),
         vue({

@@ -5,6 +5,7 @@
         "build": "vite build",
         "build:ssr": "vite build && vite build --ssr",
         "build:mcp": "vite --config vite.mcp.config.ts build",
+        "build:all": "npm run build && npm run build:mcp",
         "dev": "vite",
         "dev:mcp": "vite --config vite.mcp.config.ts",
         "inspect:mcp": "npx @mcpjam/inspector@latest",

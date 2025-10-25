@@ -1,7 +1,7 @@
 @use('Illuminate\Support\Facades\Vite')
 @use('Illuminate\Support\Facades\File')
 
-@if(Vite::isRunningHot())
+@if(Vite::useHotFile(public_path('/hot-mcp'))->isRunningHot())
     @vite(['resources/mcp-ui/app.ts'])
     <div id="app"></div>
 @else

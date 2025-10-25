@@ -1,11 +1,19 @@
-import { SET_GLOBALS_EVENT_TYPE, SetGlobalsEvent, type OpenAiGlobals } from '@mcp/types/openai';
+import {
+    SET_GLOBALS_EVENT_TYPE,
+    SetGlobalsEvent,
+    type OpenAiGlobals,
+} from '@mcp/types/openai';
 import { onBeforeUnmount, onMounted, ref, type Ref } from 'vue';
 
-export function useOpenAiGlobal<K extends keyof OpenAiGlobals>(key: K): Ref<OpenAiGlobals[K]> {
+export function useOpenAiGlobal<K extends keyof OpenAiGlobals>(
+    key: K,
+): Ref<OpenAiGlobals[K]> {
     const state = ref((window.openai as OpenAiGlobals)[key]);
 
     const onChange = () => {
-        state.value = typeof window !== 'undefined' && (window.openai as OpenAiGlobals)[key];
+        state.value =
+            typeof window !== 'undefined' &&
+            (window.openai as OpenAiGlobals)[key];
     };
 
     let handleSetGlobal: ((event: SetGlobalsEvent) => void) | null = null;
