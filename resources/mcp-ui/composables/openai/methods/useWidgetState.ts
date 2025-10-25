@@ -1,6 +1,6 @@
 import { type Ref } from 'vue';
+import { useOpenAiGlobal } from '../properties/useOpenAiGlobal';
 import { type OpenAiGlobals, type UnknownObject } from '../types';
-import { useOpenAiGlobal } from '../useOpenAiGlobal';
 
 export function useWidgetState<T extends OpenAiGlobals['widgetState']>() {
     const widgetState = useOpenAiGlobal('widgetState') as Ref<T | null>;
@@ -9,7 +9,7 @@ export function useWidgetState<T extends OpenAiGlobals['widgetState']>() {
         if (
             typeof window === 'undefined' ||
             !window.openai?.setWidgetState ||
-            typeof window.openai.setWidgetState !== 'function'
+            typeof window.openai?.setWidgetState !== 'function'
         )
             return;
 

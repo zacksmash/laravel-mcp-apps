@@ -1,5 +1,3 @@
-import { useOpenAiGlobal } from './useOpenAiGlobal';
-
 import { useCallTool } from './methods/useCallTool';
 import { useOpenExternal } from './methods/useOpenExternal';
 import { useRequestDisplayMode } from './methods/useRequestDisplayMode';
@@ -9,6 +7,7 @@ import { useWidgetState } from './methods/useWidgetState';
 import { useDisplayMode } from './properties/useDisplayMode';
 import { useLocale } from './properties/useLocale';
 import { useMaxHeight } from './properties/useMaxHeight';
+import { useOpenAiGlobal } from './properties/useOpenAiGlobal';
 import { useSafeArea } from './properties/useSafeArea';
 import { useTheme } from './properties/useTheme';
 import { useUserAgent } from './properties/useUserAgent';
