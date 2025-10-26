@@ -1,0 +1,13 @@
+{
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+        "vite.config.*": "vite.mcp.config.*",
+        "artisan": "composer.json, composer.lock, phpunit.xml",
+        "package.json": ".prettierignore, .prettierrc, eslint.config.js, package-lock.json, tsconfig.json, components.json"
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit"
+    },
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
