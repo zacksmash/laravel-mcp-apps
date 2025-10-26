@@ -53,7 +53,7 @@ class App implements Content
         return $this;
     }
 
-    public function widgetCSP(string $value): self
+    public function widgetCSP(array $value): self
     {
         $this->meta[OpenAI::WIDGET_CSP->value] = $value;
 
