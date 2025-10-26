@@ -28,7 +28,6 @@ class WeatherTool extends Tool
     public function handle(Request $request): Response|array
     {
         $this->structuredContent($this->getContent($request));
-
         $this->meta(['route' => 'weather']);
 
         $city = $request->get('city');
@@ -122,7 +121,7 @@ class WeatherTool extends Tool
         return [
             ...parent::toArray(),
             '_meta' => [ // This is the Tool Response meta
-                OpenAI::OUTPUT_TEMPLATE->value => WeatherAppResource::template(),
+                OpenAI::OUTPUT_TEMPLATE->value => WeatherAppResource::TEMPLATE,
                 OpenAI::WIDGET_ACCESSIBLE->value => true,
                 OpenAI::TOOL_INVOKING->value => 'Working on it...',
                 OpenAI::TOOL_INVOKED->value => 'Example Tool Completed',

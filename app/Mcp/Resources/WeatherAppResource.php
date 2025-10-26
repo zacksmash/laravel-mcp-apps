@@ -13,9 +13,11 @@ class WeatherAppResource extends Resource
 
     protected string $title = 'Weather App';
 
-    protected string $mimeType = OpenAI::MIME_TYPE->value;
+    const TEMPLATE = 'ui://apps/weather';
 
-    protected string $uri = 'ui://apps/weather';
+    protected string $uri = self::TEMPLATE;
+
+    protected string $mimeType = OpenAI::MIME_TYPE->value;
 
     /**
      * The resource's description.
@@ -31,21 +33,11 @@ class WeatherAppResource extends Resource
     {
         /**
          * @custom
-         * The app macro is defined in the AppServiceProvider to configure the UI
-         * This may be deprecated in the future to more standardized approach.
+         * The app macro is defined in AppServiceProvider to configure the UI options
+         * This may be deprecated in the future to a more standardized approach.
          */
         return Response::app(
             config: fn (App $app) => $app->prefersBorder()
         );
-    }
-
-    /**
-     * @custom
-     * This is a custom method to provide the UI template name to any callers
-     * This may be deprecated in the future to more standardized approach.
-     */
-    public static function template()
-    {
-        return (new static)->uri();
     }
 }
