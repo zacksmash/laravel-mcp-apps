@@ -27,16 +27,30 @@ class WeatherTool extends Tool
      */
     public function handle(Request $request): Response|array
     {
-        $city = $request->get('city');
+        $this->structuredContent($this->getContent($request));
 
-        $this->getContent($request);
+        $this->meta(['route' => 'weather']);
+
+        $city = $request->get('city');
 
         return Response::text("Here is the current weather information you requested for {$city}.");
     }
 
-    protected function getContent(Request $request): void
+    /**
+     * Get the tool's input schema.
+     *
+     * @return array<string, \Illuminate\JsonSchema\JsonSchema>
+     */
+    public function schema(JsonSchema $schema): array
     {
-        $this->structured_content = [
+        return [
+            'city' => $schema->string()->description('The city to get the weather for.'),
+        ];
+    }
+
+    protected function getContent(Request $request): array
+    {
+        return [
             // 'user' => auth()->user(),
             'city' => $request->get('city', 'San Francisco'),
             'date' => now()->format('l M jS, Y'),
@@ -72,48 +86,42 @@ class WeatherTool extends Tool
     }
 
     /**
-     * Get the tool's input schema.
-     *
-     * @return array<string, \Illuminate\JsonSchema\JsonSchema>
+     * @custom
+     * This is a custom method to provide content to hydrate the UI component
+     * This may be deprecated in the future to more standardized approach.
      */
-    public function schema(JsonSchema $schema): array
+    public function structuredContent(?array $data = null): array
     {
-        return [
-            'city' => $schema->string()->description('The city to get the weather for.'),
-        ];
+        if (empty($data)) {
+            return $this->structured_content;
+        }
+
+        return $this->structured_content = $data;
     }
 
     /**
      * @custom
-     * This is a custom method to provide meta information for the UI.
-     * This may be deprecated in the future in favor of a more standardized approach.
+     * This is a custom method to provide meta information to the UI component
+     * This may be deprecated in the future to more standardized approach.
      */
-    public function structuredContent(): ?array
+    public function meta(?array $meta = null): array
     {
-        return $this->structured_content;
-    }
+        if (empty($meta)) {
+            return $this->meta;
+        }
 
-    /**
-     * @custom
-     * This is a custom method to provide meta information for the UI.
-     * This may be deprecated in the future in favor of a more standardized approach.
-     */
-    public function meta()
-    {
-        return [
-            'route' => 'weather',
-        ];
+        return $this->meta = $meta;
     }
 
     /**
      * @override
-     * Get the tool array representation.
+     * Get the tool's array representation.
      */
     public function toArray(): array
     {
         return [
             ...parent::toArray(),
-            '_meta' => [
+            '_meta' => [ // This is the Tool Response meta
                 OpenAI::OUTPUT_TEMPLATE->value => WeatherAppResource::template(),
                 OpenAI::WIDGET_ACCESSIBLE->value => true,
                 OpenAI::TOOL_INVOKING->value => 'Working on it...',

@@ -7,7 +7,7 @@ import vueDevTools from 'vite-plugin-vue-devtools';
 export default defineConfig({
     plugins: [
         vueDevTools({
-            appendTo: 'app.ts',
+            appendTo: 'main.ts',
         }),
         laravel({
             input: ['resources/mcp/main.ts'],

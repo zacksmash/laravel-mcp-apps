@@ -32,9 +32,13 @@ class App implements Content
         return $this->toArray();
     }
 
-    public function meta(array $meta): self
+    public function meta(?array $meta = null): self|array
     {
-        $this->meta = array_merge($this->meta, $meta);
+        if (empty($this->meta)) {
+            return $this->meta;
+        }
+
+        $this->meta = array_merge($this->meta, $meta ?? []);
 
         return $this;
     }
@@ -78,7 +82,7 @@ class App implements Content
             'name' => $resource->name(),
             'title' => $resource->title(),
             'mimeType' => $resource->mimeType(),
-            '_meta' => $this->meta ?? null,
+            '_meta' => $this->meta(),
         ], fn ($value) => filled($value));
     }
 

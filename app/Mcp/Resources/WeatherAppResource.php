@@ -27,20 +27,22 @@ class WeatherAppResource extends Resource
     /**
      * Handle the resource request.
      */
-    public function handle(): Response|array
+    public function handle(): Response
     {
         /**
          * @custom
-         * This is a custom macro to provide meta information for the UI.
-         * This may be deprecated in the future in favor of a more standardized approach.
+         * The app macro is defined in the AppServiceProvider to configure the UI
+         * This may be deprecated in the future to more standardized approach.
          */
-        return Response::app(fn (App $app) => $app->prefersBorder());
+        return Response::app(
+            config: fn (App $app) => $app->prefersBorder()
+        );
     }
 
     /**
      * @custom
-     * This is a custom method to provide the template URI for the UI.
-     * This may be deprecated in the future in favor of a more standardized approach.
+     * This is a custom method to provide the UI template name to any callers
+     * This may be deprecated in the future to more standardized approach.
      */
     public static function template()
     {

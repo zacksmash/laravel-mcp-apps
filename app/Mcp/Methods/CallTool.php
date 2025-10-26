@@ -10,6 +10,8 @@ use Laravel\Mcp\Server\Tool;
 class CallTool extends McpCallTool
 {
     /**
+     * @override
+     *
      * @return callable(Collection<int, Response>): array{content: array<int, array<string, mixed>>, isError: bool}
      */
     protected function serializable(Tool $tool): callable
@@ -23,6 +25,6 @@ class CallTool extends McpCallTool
                 : null,
             'content' => $responses->map(fn (Response $response): array => $response->content()->toTool($tool))->all(),
             'isError' => $responses->contains(fn (Response $response): bool => $response->isError()),
-        ], fn ($value): bool => $value !== null);
+        ], fn ($value): bool => filled($value));
     }
 }

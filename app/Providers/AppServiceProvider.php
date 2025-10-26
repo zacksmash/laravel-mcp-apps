@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
-use Laravel\Mcp\Response;
 use Laravel\Passport\Passport;
 
 class AppServiceProvider extends ServiceProvider
@@ -39,16 +38,16 @@ class AppServiceProvider extends ServiceProvider
 
         /**
          * @custom
-         * This is a custom macro to provide meta information for the UI.
-         * This may be deprecated in the future in favor of a more standardized approach.
+         * This is a custom macro to provide meta information to the UI component
+         * This may be deprecated in the future to more standardized approach.
          */
-        Response::macro('app', function (?callable $callback = null, ?string $view = null) {
+        \Laravel\Mcp\Response::macro('app', function (?string $view = null, ?callable $config = null) {
             $app = new \App\Mcp\Content\App(
                 trim($view ?? view('mcp.app')->render())
             );
 
             return new static(
-                $callback ? $callback($app) : $app
+                $config ? $config($app) : $app
             );
         });
     }
