@@ -11,20 +11,7 @@ import { type WeatherWidgetData, type WeatherWidgetState } from '@mcp/types';
 import { computed, Ref, ref } from 'vue';
 
 const { widgetState, setWidgetState } = useWidgetState<WeatherWidgetState>();
-const toolOutput = useWidgetProps(() => ({
-    city: 'Loading',
-    date: 'Loading',
-    temp: {
-        current: { f: 0, c: 0 },
-        high: { f: 0, c: 0 },
-        low: { f: 0, c: 0 },
-    },
-    conditions: [
-        { label: 'Humidity', value: 'Loading' },
-        { label: 'Wind', value: 'Loading' },
-        { label: 'Precipitation', value: 'Loading' },
-    ],
-})) as Ref<WeatherWidgetData>;
+const toolOutput = useWidgetProps() as Ref<WeatherWidgetData>;
 const callTool = useCallTool();
 const openExternal = useOpenExternal();
 const sendFollowUpMessage = useSendFollowUpMessage();
