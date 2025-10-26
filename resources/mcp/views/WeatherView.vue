@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import {
     useCallTool,
-    useMaxHeight,
     useOpenExternal,
     useRequestDisplayMode,
     useSendFollowUpMessage,
@@ -18,15 +17,12 @@ const openExternal = useOpenExternal();
 const sendFollowUpMessage = useSendFollowUpMessage();
 const requestDisplayMode = useRequestDisplayMode();
 const isLoading = ref(false);
-const maxHeight = useMaxHeight();
 
 const unit = computed(() => {
     return widgetState.value?.units || 'f';
 });
 
 const onUpdateState = async (units: 'c' | 'f') => {
-    console.log(maxHeight);
-
     await setWidgetState({ units });
 };
 
@@ -62,7 +58,11 @@ const onRequestDisplayMode = async () => {
 };
 
 const onGetWindowObject = () => {
-    console.log('window.openai:', window.openai);
+    console.log(
+        '%c✦ OpenAI Window API \n',
+        'color: skyblue; font-size: 16px; font-weight: bold',
+        window.openai,
+    );
 };
 </script>
 
