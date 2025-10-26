@@ -37,6 +37,10 @@ This will open the MCPJam inspector, (click the x in the top-right corner of the
 }
 ```
 
+Now, you can visit the "Tools" section, click on the `weather-tool`, then click "Execute". You should see a fully working example MCP app that's ready to be deployed to ChatGPT as a custom connector! 🎉
+
+This app includes an example of some of the functions and features of the OpenAI window API, using the built in Vue composables.
+
 ### MCP App Build
 
 Custom build config lives in `vite.mcp.config.ts`. Source TypeScript for Apps & tools lives under `resources/mcp`. Build artifacts land in `public/build` and are referenced by the view template in `resources/views/mcp/app.blade.php`.
