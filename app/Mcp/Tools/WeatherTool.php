@@ -15,6 +15,8 @@ class WeatherTool extends Tool
 {
     protected $structured_content;
 
+    protected $meta;
+
     /**
      * The tool's description.
      */
@@ -89,7 +91,7 @@ class WeatherTool extends Tool
      * This is a custom method to provide content to hydrate the UI component
      * This may be deprecated in the future to more standardized approach.
      */
-    public function structuredContent(?array $data = null): array
+    public function structuredContent(?array $data = null): ?array
     {
         if (empty($data)) {
             return $this->structured_content;
@@ -103,7 +105,7 @@ class WeatherTool extends Tool
      * This is a custom method to provide meta information to the UI component
      * This may be deprecated in the future to more standardized approach.
      */
-    public function meta(?array $meta = null): array
+    public function meta(?array $meta = null): ?array
     {
         if (empty($meta)) {
             return $this->meta;
@@ -120,7 +122,8 @@ class WeatherTool extends Tool
     {
         return [
             ...parent::toArray(),
-            '_meta' => [ // This is the Tool Response meta
+            // Required meta object for OpenAI Apps spec
+            '_meta' => [
                 OpenAI::OUTPUT_TEMPLATE->value => WeatherAppResource::TEMPLATE,
                 OpenAI::WIDGET_ACCESSIBLE->value => true,
                 OpenAI::TOOL_INVOKING->value => 'Working on it...',

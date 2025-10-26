@@ -82,7 +82,7 @@ class App implements Content
             'name' => $resource->name(),
             'title' => $resource->title(),
             'mimeType' => $resource->mimeType(),
-            '_meta' => $this->meta(),
+            '_meta' => $this->meta,
         ], fn ($value) => filled($value));
     }
 

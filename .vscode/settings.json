@@ -1,5 +1,6 @@
 {
     "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.expand": false,
     "explorer.fileNesting.patterns": {
         "vite.config.*": "vite.mcp.config.*",
         "artisan": "composer.json, composer.lock, phpunit.xml, .env*",
