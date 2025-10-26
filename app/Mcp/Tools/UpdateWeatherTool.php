@@ -45,7 +45,7 @@ class UpdateWeatherTool extends Tool
     public function getContent(Request $request): void
     {
         $this->structured_content = [
-            'user' => auth()->user(),
+            // 'user' => auth()->user(),
             'city' => $request->get('city', 'Denver'),
             'date' => now()->format('l M jS, Y'),
             'temp' => [

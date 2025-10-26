@@ -37,7 +37,7 @@ class WeatherTool extends Tool
     protected function getContent(Request $request): void
     {
         $this->structured_content = [
-            'user' => auth()->user(),
+            // 'user' => auth()->user(),
             'city' => $request->get('city', 'San Francisco'),
             'date' => now()->format('l M jS, Y'),
             'temp' => [
