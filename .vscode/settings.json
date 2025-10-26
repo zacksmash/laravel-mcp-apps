@@ -2,8 +2,9 @@
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {
         "vite.config.*": "vite.mcp.config.*",
-        "artisan": "composer.json, composer.lock, phpunit.xml",
-        "package.json": ".prettierignore, .prettierrc, eslint.config.js, package-lock.json, tsconfig.json, components.json"
+        "artisan": "composer.json, composer.lock, phpunit.xml, .env*",
+        "package.json": ".prettierignore, .prettierrc, eslint.config.js, package-lock.json, tsconfig.json, components.json",
+        "README.md": ".editorconfig, .gitignore, LICENSE, .gitattributes"
     },
     "editor.codeActionsOnSave": {
         "source.fixAll": "explicit"
