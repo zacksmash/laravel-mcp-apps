@@ -31,7 +31,7 @@ This will open the MCPJam inspector, (click the x in the top-right corner of the
     "mcpServers": {
         "Laravel-mcp-apps": {
             "type": "sse",
-            "url": "http://laravel-mcp-aps.test/mcp"
+            "url": "http://laravel-mcp-apps.test/mcp"
         }
     }
 }
