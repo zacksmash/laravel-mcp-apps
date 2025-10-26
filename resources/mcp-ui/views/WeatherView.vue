@@ -40,9 +40,12 @@ const onOpenExternal = () => {
 
 const onCallTool = async () => {
     isLoading.value = true;
+
     const res = (await callTool('update-weather-tool', {
         city: 'Denver',
     })) as any;
+
+    isLoading.value = false;
 
     if (res?.isError) {
         throw new Error(
@@ -51,8 +54,7 @@ const onCallTool = async () => {
         );
     }
 
-    isLoading.value = false;
-    toolOutput.value = res?.structuredContent as WeatherWidgetData;
+    toolOutput.value = res?.structuredContent;
 };
 
 const onRequestDisplayMode = async () => {
