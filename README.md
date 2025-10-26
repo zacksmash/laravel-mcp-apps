@@ -28,6 +28,19 @@ Start the MCP dev process and open MCPJam to inspect MCP Server
 composer dev:mcp
 ```
 
+This will open the MCPJam inspector, (click the x in the top-right corner of the splash screen to view the dashboard). Next, click "Import JSON" and paste the following MCP Server Config:
+
+```json
+{
+    "mcpServers": {
+        "Laravel-mcp-apps": {
+            "type": "sse",
+            "url": "http://laravel-mcp-aps.test/mcp"
+        }
+    }
+}
+```
+
 ### MCP App Build
 
 Custom build config lives in `vite.mcp.config.ts`. Source TypeScript for Apps & tools lives under `resources/mcp`. Build artifacts land in `public/build` (or configured out dir) and are referenced by MCP server resource definitions in `app/Mcp/Resources`.
