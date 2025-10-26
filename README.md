@@ -2,6 +2,8 @@
 
 Laravel starter for building Model Context Protocol (MCP) Servers and OpenAI-compatible Apps using the official [`laravel/mcp`](https://github.com/laravel/mcp) package.
 
+This starter also includes the standard Laravel Vue starter kit, with Passport installed for using OAuth with your MCP server.
+
 ### Quick Start
 
 Clone and bootstrap:
@@ -15,12 +17,6 @@ composer setup
 That `composer setup` script will: install PHP deps, copy example env if missing, generate app key, run migrations, and install Node deps.
 
 ### Development
-
-Start the standard laravel app build
-
-```bash
-composer dev
-```
 
 Start the MCP dev process and open MCPJam to inspect MCP Server
 
@@ -43,7 +39,9 @@ This will open the MCPJam inspector, (click the x in the top-right corner of the
 
 ### MCP App Build
 
-Custom build config lives in `vite.mcp.config.ts`. Source TypeScript for Apps & tools lives under `resources/mcp`. Build artifacts land in `public/build` (or configured out dir) and are referenced by MCP server resource definitions in `app/Mcp/Resources`.
+Custom build config lives in `vite.mcp.config.ts`. Source TypeScript for Apps & tools lives under `resources/mcp`. Build artifacts land in `public/build` and are referenced by the view template in `resources/views/mcp/app.blade.php`.
+
+A few extensions to the Laravel MCP package have been made in `app/Mcp/..`, to make the required meta fields avaialble. Hopefully, these will be first-party in the future and can be removed!
 
 ### License
 
