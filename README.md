@@ -24,12 +24,14 @@ Start the MCP dev process and open MCPJam to inspect MCP Server
 composer dev:mcp
 ```
 
-This will open the MCPJam inspector, (click the x in the top-right corner of the splash screen to view the dashboard). Next, click "Import JSON" and paste the following MCP Server Config:
+This will open the MCPJam inspector, where you can create a free account or login, or you can click the "X" in the top-right corner of the splash screen to view the dashboard.
+
+Next, click "Import JSON" and paste the following MCP Server Config:
 
 ```json
 {
     "mcpServers": {
-        "Laravel-mcp-apps": {
+        "laravel-mcp-apps": {
             "type": "sse",
             "url": "http://laravel-mcp-apps.test/mcp"
         }
