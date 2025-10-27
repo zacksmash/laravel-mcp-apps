@@ -36,8 +36,8 @@ class WeatherAppResource extends Resource
          * The app macro is defined in AppServiceProvider to configure the UI options
          * This may be deprecated in the future to a more standardized approach.
          */
-        return Response::app(
-            config: fn (App $app) => $app->prefersBorder()
+        return Response::chatGPT(view('mcp.app'),
+            fn (App $app) => $app->prefersBorder()
         );
     }
 }

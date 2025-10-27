@@ -10,6 +10,9 @@ use Laravel\Mcp\Server\Tool;
 
 class App implements Content
 {
+    /**
+     * @var array<string, mixed>
+     */
     protected array $meta = [];
 
     public function __construct(
@@ -32,13 +35,17 @@ class App implements Content
         return $this->toArray();
     }
 
+    /**
+     * @param  array<string, mixed>|null  $meta
+     * @return array<string, mixed>|self
+     */
     public function meta(?array $meta = null): self|array
     {
-        if (empty($this->meta)) {
+        if (blank($meta)) {
             return $this->meta;
         }
 
-        $this->meta = array_merge($this->meta, $meta ?? []);
+        $this->meta = array_merge($this->meta, $meta);
 
         return $this;
     }
@@ -57,6 +64,9 @@ class App implements Content
         return $this;
     }
 
+    /**
+     * @param  array<string, mixed>  $value
+     */
     public function widgetCSP(array $value): self
     {
         $this->meta[OpenAI::WIDGET_CSP->value] = $value;
@@ -83,7 +93,7 @@ class App implements Content
             'title' => $resource->title(),
             'mimeType' => $resource->mimeType(),
             '_meta' => $this->meta,
-        ], fn ($value) => filled($value));
+        ], filled(...));
     }
 
     public function __toString(): string
@@ -97,7 +107,7 @@ class App implements Content
     public function toArray(): array
     {
         return [
-            'type' => 'app',
+            'type' => 'text',
             'text' => $this->text,
         ];
     }
