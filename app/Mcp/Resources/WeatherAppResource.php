@@ -9,11 +9,11 @@ use Laravel\Mcp\Server\Resource;
 
 class WeatherAppResource extends Resource
 {
+    const TEMPLATE = 'ui://apps/weather';
+
     protected string $name = 'weather-app';
 
     protected string $title = 'Weather App';
-
-    const TEMPLATE = 'ui://apps/weather';
 
     protected string $uri = self::TEMPLATE;
 
@@ -36,7 +36,7 @@ class WeatherAppResource extends Resource
          * The app macro is defined in AppServiceProvider to configure the UI options
          * This may be deprecated in the future to a more standardized approach.
          */
-        return Response::chatGPT(view('mcp.app'),
+        return Response::app(view('mcp.app'),
             fn (App $app) => $app->prefersBorder()
         );
     }

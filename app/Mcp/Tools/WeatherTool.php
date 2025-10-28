@@ -29,8 +29,8 @@ class WeatherTool extends Tool
      */
     public function handle(Request $request): Response|array
     {
-        $this->toolContent($this->getContent($request));
-        $this->toolMeta(['route' => 'weather']);
+        $this->structuredContent($this->getContent($request));
+        $this->meta(['route' => 'weather']);
 
         $city = $request->get('city');
 
@@ -91,7 +91,7 @@ class WeatherTool extends Tool
      * This is a custom method to provide content to hydrate the UI component
      * This may be deprecated in the future to more standardized approach.
      */
-    public function toolContent(?array $data = null): ?array
+    public function structuredContent(?array $data = null): ?array
     {
         if (empty($data)) {
             return $this->structured_content;
@@ -105,7 +105,7 @@ class WeatherTool extends Tool
      * This is a custom method to provide toolMeta information to the UI component
      * This may be deprecated in the future to more standardized approach.
      */
-    public function toolMeta(?array $meta = null): ?array
+    public function meta(?array $meta = null): ?array
     {
         if (empty($meta)) {
             return $this->meta;

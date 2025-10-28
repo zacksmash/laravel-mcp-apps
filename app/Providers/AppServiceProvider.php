@@ -41,7 +41,7 @@ class AppServiceProvider extends ServiceProvider
          * This is a custom macro to provide meta information to the UI component
          * This may be deprecated in the future to more standardized approach.
          */
-        \Laravel\Mcp\Response::macro('chatGPT', function (?string $view = null, ?callable $config = null) {
+        \Laravel\Mcp\Response::macro('app', function (?string $view = null, ?callable $config = null) {
             $app = new \App\Mcp\Content\App(
                 trim($view ?? view('mcp.app')->render())
             );

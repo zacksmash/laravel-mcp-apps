@@ -17,11 +17,11 @@ class CallTool extends McpCallTool
     protected function serializable(Tool $tool): callable
     {
         return fn (Collection $responses): array => array_filter([
-            '_meta' => method_exists($tool, 'toolMeta')
-                ? $tool->toolMeta()
+            '_meta' => method_exists($tool, 'meta')
+                ? $tool->meta()
                 : null,
-            'structuredContent' => method_exists($tool, 'toolContent')
-                ? $tool->toolContent()
+            'structuredContent' => method_exists($tool, 'structuredContent')
+                ? $tool->structuredContent()
                 : null,
             'content' => $responses->map(fn (Response $response): array => $response->content()->toTool($tool))->all(),
             'isError' => $responses->contains(fn (Response $response): bool => $response->isError()),

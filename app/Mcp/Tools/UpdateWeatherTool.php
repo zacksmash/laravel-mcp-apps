@@ -25,7 +25,7 @@ class UpdateWeatherTool extends Tool
      */
     public function handle(Request $request): Response
     {
-        $this->toolContent($this->getContent($request));
+        $this->structuredContent($this->getContent($request));
 
         return Response::text('Weather widget updated successfully.');
     }
@@ -84,7 +84,7 @@ class UpdateWeatherTool extends Tool
      * This is a custom method to provide content to hydrate the ui component
      * This may be deprecated in the future to more standardized approach.
      */
-    public function toolContent(?array $data = null): array
+    public function structuredContent(?array $data = null): array
     {
         if (empty($data)) {
             return $this->structured_content;
