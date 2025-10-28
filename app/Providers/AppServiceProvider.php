@@ -35,20 +35,5 @@ class AppServiceProvider extends ServiceProvider
         Passport::tokensCan([
             'mcp:use' => 'Use the MCP Server API',
         ]);
-
-        /**
-         * @custom
-         * This is a custom macro to provide meta information to the UI component
-         * This may be deprecated in the future to more standardized approach.
-         */
-        \Laravel\Mcp\Response::macro('app', function (?string $view = null, ?callable $config = null) {
-            $app = new \App\Mcp\Content\App(
-                trim($view ?? view('mcp.app')->render())
-            );
-
-            return new static(
-                $config ? $config($app) : $app
-            );
-        });
     }
 }
