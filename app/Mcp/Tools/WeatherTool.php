@@ -10,6 +10,8 @@ use Laravel\Mcp\Request;
 use Laravel\Mcp\Response;
 use Laravel\Mcp\Server\Tool;
 use Laravel\Mcp\Server\Tools\Annotations\IsReadOnly;
+use Laravel\Mcp\Support\SecurityScheme;
+use Laravel\Passport\Passport;
 
 #[IsReadOnly()]
 class WeatherTool extends Tool
@@ -26,7 +28,7 @@ class WeatherTool extends Tool
      */
     public function handle(Request $request, WeatherData $weatherData): Response|array
     {
-        $city = $request->get('city');
+        $city = $request->get('city', 'San Francisco');
 
         return Response::text("Here is the current weather information you requested for {$city}.")
             ->meta(['route' => 'weather'])
@@ -42,6 +44,16 @@ class WeatherTool extends Tool
     {
         return [
             'city' => $schema->string()->description('The city to get the weather for.'),
+        ];
+    }
+
+    /**
+     * Set the tool's security scheme policies
+     */
+    public function securitySchemes(SecurityScheme $scheme): array
+    {
+        return [
+            $scheme->oauth2(Passport::scopeIds()),
         ];
     }
 
