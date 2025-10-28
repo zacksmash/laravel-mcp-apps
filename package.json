@@ -8,9 +8,9 @@
         "build:all": "npm run build && npm run build:mcp",
         "dev": "vite",
         "dev:mcp": "vite --config vite.mcp.config.ts",
-        "inspect:mcp": "npx @mcpjam/inspector@latest",
         "format": "prettier --write resources/",
         "format:check": "prettier --check resources/",
+        "inspect:mcp": "npx @mcpjam/inspector@latest",
         "lint": "eslint . --fix"
     },
     "devDependencies": {

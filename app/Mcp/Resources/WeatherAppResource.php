@@ -2,7 +2,7 @@
 
 namespace App\Mcp\Resources;
 
-use App\Enums\OpenAI;
+use Laravel\Mcp\Enums\OpenAI;
 use Laravel\Mcp\Response;
 use Laravel\Mcp\Server\Content\App;
 use Laravel\Mcp\Server\Resource;

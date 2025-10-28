@@ -3,9 +3,9 @@
 namespace App\Mcp\Tools;
 
 use App\Actions\WeatherData;
-use App\Enums\OpenAI;
 use App\Mcp\Resources\WeatherAppResource;
 use Illuminate\JsonSchema\JsonSchema;
+use Laravel\Mcp\Enums\OpenAI;
 use Laravel\Mcp\Request;
 use Laravel\Mcp\Response;
 use Laravel\Mcp\Server\Tool;
