@@ -35,6 +35,7 @@
     },
     "dependencies": {
         "@inertiajs/vue3": "^2.1.0",
+        "@mcp-ui/client": "^5.14.1",
         "@vueuse/core": "^12.8.2",
         "apexcharts": "^5.3.5",
         "class-variance-authority": "^0.7.1",

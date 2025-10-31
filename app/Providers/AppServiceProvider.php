@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Mcp\Content\Resource;
 use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
+use Laravel\Mcp\Response;
 use Laravel\Passport\Passport;
 
 class AppServiceProvider extends ServiceProvider
@@ -35,5 +37,9 @@ class AppServiceProvider extends ServiceProvider
         Passport::tokensCan([
             'mcp:use' => 'Use the MCP Server API',
         ]);
+
+        Response::macro('resource', function (array $data): static {
+            return new static(new Resource($data));
+        });
     }
 }

@@ -13,18 +13,9 @@ class WeatherData
             'city' => $request->get('city', 'San Francisco'),
             'date' => now()->format('l M jS, Y'),
             'temp' => [
-                'current' => [
-                    'c' => 28,
-                    'f' => 82,
-                ],
-                'high' => [
-                    'c' => 26,
-                    'f' => 78,
-                ],
-                'low' => [
-                    'c' => 15,
-                    'f' => 59,
-                ],
+                'current' => $this->randomTemp(),
+                'high' => $this->randomTemp(),
+                'low' => $this->randomTemp(),
             ],
             'conditions' => [
                 [
@@ -40,6 +31,17 @@ class WeatherData
                     'value' => '15%',
                 ],
             ],
+        ];
+    }
+
+    public function randomTemp(): array
+    {
+        $c = rand(15, 40);
+        $f = round($c * 9 / 5 + 32);
+
+        return [
+            'c' => $c,
+            'f' => $f,
         ];
     }
 }

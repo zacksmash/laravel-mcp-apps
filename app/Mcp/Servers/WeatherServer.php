@@ -57,6 +57,6 @@ class WeatherServer extends Server
      * @var array<int, class-string<\Laravel\Mcp\Server\Prompt>>
      */
     protected array $prompts = [
-        //
+        \App\Mcp\Prompts\GreetingPrompt::class,
     ];
 }
