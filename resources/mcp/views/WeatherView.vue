@@ -69,7 +69,7 @@ const onGetWindowObject = () => {
 <template>
     <div>
         <div
-            class="flex justify-between overflow-hidden rounded-md bg-white dark:bg-neutral-800"
+            class="flex justify-between overflow-hidden bg-white dark:bg-neutral-800"
             v-if="toolOutput"
         >
             <div class="flex w-full max-w-xs flex-col p-4">
