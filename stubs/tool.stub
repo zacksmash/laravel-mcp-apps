@@ -43,10 +43,12 @@ class {{ class }} extends Tool
      *
      * @return array<string, array<string, mixed>>
      */
-    public function securitySchemes(SecuritySchemes $scheme): array
-    {
-        return [
-            //
-        ];
-    }
+    // public function securitySchemes(SecuritySchemes $scheme): array {}
+
+    /**
+     * Get the tool's structured content.
+     * 
+     * @return array<string, mixed>
+     */
+    // public function structuredContent(Request $request): array {}
 }

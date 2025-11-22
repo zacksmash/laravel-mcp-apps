@@ -23,7 +23,7 @@ class Tool extends McpTool
      */
     public function structuredContent(Request $request): array
     {
-        return [];
+        return ! empty($this->structured_content) ? $this->structured_content : [];
     }
 
     /**
