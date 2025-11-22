@@ -20,6 +20,7 @@ export type OpenAiGlobals<
     toolOutput: ToolOutput | null;
     toolResponseMetadata: ToolResponseMetadata | null;
     widgetState: WidgetState | null;
+    requestModal: RequestModal;
     setWidgetState: (state: WidgetState) => Promise<void>;
 };
 
@@ -60,7 +61,7 @@ export type UserAgent = {
 };
 
 /** Display mode */
-export type DisplayMode = 'pip' | 'inline' | 'fullscreen';
+export type DisplayMode = 'pip' | 'inline' | 'fullscreen' | 'modal';
 export type RequestDisplayMode = (args: { mode: DisplayMode }) => Promise<{
     /**
      * The granted display mode. The host may reject the request.
@@ -68,6 +69,8 @@ export type RequestDisplayMode = (args: { mode: DisplayMode }) => Promise<{
      */
     mode: DisplayMode;
 }>;
+
+export type RequestModal = (title: string) => Promise<void>;
 
 export type CallToolResponse = {
     result: string;

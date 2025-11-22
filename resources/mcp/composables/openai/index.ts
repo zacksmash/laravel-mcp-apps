@@ -1,6 +1,7 @@
 import { useCallTool } from './methods/useCallTool';
 import { useOpenExternal } from './methods/useOpenExternal';
 import { useRequestDisplayMode } from './methods/useRequestDisplayMode';
+import { useRequestModal } from './methods/useRequestModal';
 import { useSendFollowUpMessage } from './methods/useSendFollowUpMessage';
 import { useWidgetState } from './methods/useWidgetState';
 
@@ -23,6 +24,7 @@ export {
     useOpenAiGlobal,
     useOpenExternal,
     useRequestDisplayMode,
+    useRequestModal,
     useSafeArea,
     useSendFollowUpMessage,
     useTheme,

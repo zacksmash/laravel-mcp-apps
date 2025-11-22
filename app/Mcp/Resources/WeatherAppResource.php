@@ -36,11 +36,6 @@ class WeatherAppResource extends Resource
          * This may be deprecated in the future to a more standardized approach.
          */
         return Response::text(view('mcp.app')->render())
-            ->withMeta(McpApp::OPEN_AI_WIDGET_PREFERS_BORDER, true)
-            ->withMeta(McpApp::OPEN_AI_WIDGET_CSP, [
-                'connect_domains' => [
-                    'https://vite.mcpauth.test',
-                ],
-            ]);
+            ->withMeta(McpApp::OPEN_AI_WIDGET_PREFERS_BORDER, true);
     }
 }

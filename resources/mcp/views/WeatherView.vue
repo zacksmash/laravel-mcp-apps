@@ -6,6 +6,7 @@ import {
     useSendFollowUpMessage,
     useWidgetProps,
     useWidgetState,
+    useRequestModal
 } from '@mcp/composables/openai';
 import { type WeatherWidgetData, type WeatherWidgetState } from '@mcp/types';
 import { computed, Ref, ref } from 'vue';
@@ -16,6 +17,7 @@ const callTool = useCallTool();
 const openExternal = useOpenExternal();
 const sendFollowUpMessage = useSendFollowUpMessage();
 const requestDisplayMode = useRequestDisplayMode();
+const requestModal = useRequestModal();
 const isLoading = ref(false);
 
 const unit = computed(() => {
@@ -55,6 +57,10 @@ const onCallTool = async () => {
 
 const onRequestDisplayMode = async () => {
     await requestDisplayMode('fullscreen');
+};
+
+const onRequestModal = async () => {
+    await requestModal('weather-details-modal');
 };
 
 const onGetWindowObject = () => {
@@ -261,6 +267,13 @@ const onGetWindowObject = () => {
                     class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-gray-50 dark:bg-white/10 dark:text-white dark:shadow-none dark:inset-ring-white/5 dark:hover:bg-white/20"
                 >
                     Display Mode
+                </button>
+
+                <button
+                    @click="onRequestModal"
+                    class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-gray-50 dark:bg-white/10 dark:text-white dark:shadow-none dark:inset-ring-white/5 dark:hover:bg-white/20"
+                >
+                    Request Modal
                 </button>
 
                 <button
