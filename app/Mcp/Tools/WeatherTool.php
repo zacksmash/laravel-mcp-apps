@@ -2,7 +2,7 @@
 
 namespace App\Mcp\Tools;
 
-use App\Mcp\Enums\OpenAI;
+use App\Mcp\Enums\McpApp;
 use App\Mcp\Resources\WeatherAppResource;
 use App\Mcp\Support\SecuritySchemes;
 use Illuminate\JsonSchema\JsonSchema;
@@ -14,11 +14,11 @@ use Laravel\Mcp\Server\Tools\Annotations\IsReadOnly;
 class WeatherTool extends Tool
 {
     protected ?array $meta = [
-        OpenAI::OUTPUT_TEMPLATE => WeatherAppResource::TEMPLATE,
-        OpenAI::WIDGET_ACCESSIBLE => true,
-        OpenAI::TOOL_INVOKING => 'Working on it...',
-        OpenAI::TOOL_INVOKED => 'Example Tool Completed',
-        OpenAI::RESULT_CAN_PRODUCE_WIDGET => true,
+        McpApp::OPEN_AI_OUTPUT_TEMPLATE => WeatherAppResource::TEMPLATE,
+        McpApp::OPEN_AI_WIDGET_ACCESSIBLE => true,
+        McpApp::OPEN_AI_TOOL_INVOKING => 'Working on it...',
+        McpApp::OPEN_AI_TOOL_INVOKED => 'Example Tool Completed',
+        McpApp::OPEN_AI_RESULT_CAN_PRODUCE_WIDGET => true,
     ];
 
     /**
@@ -55,7 +55,7 @@ class WeatherTool extends Tool
     }
 
     /**
-     * Get the tool's input schema.
+     * Get the tool's security schemes.
      *
      * @return array<string, array<string, mixed>>
      */
@@ -68,8 +68,6 @@ class WeatherTool extends Tool
 
     /**
      * Get the content for the weather tool.
-     *
-     * @return array<string, mixed>
      */
     protected function getContent(Request $request): array
     {

@@ -6,11 +6,9 @@ use App\Mcp\Support\SecuritySchemes;
 use Laravel\Mcp\Server\Tool as McpTool;
 
 /**
- * @extends McpTool<null>
+ * @todo Remove when laravel support structured content & security schemes in MCP servers
  *
  * @see \Laravel\Mcp\Server\Tool
- *
- * @todo Remove when laravel support structured content & security schemes in MCP servers
  */
 class Tool extends McpTool
 {
