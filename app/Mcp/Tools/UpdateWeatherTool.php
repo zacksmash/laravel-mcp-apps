@@ -22,9 +22,9 @@ class UpdateWeatherTool extends Tool
      */
     public function handle(Request $request): Response
     {
-        $this->setStructuredContent($this->getContent($request));
+        $city = $request->get('city', 'Denver');
 
-        return Response::text('Weather widget updated successfully.');
+        return Response::text("Weather widget updated successfully for {$city}.");
     }
 
     /**
@@ -37,6 +37,16 @@ class UpdateWeatherTool extends Tool
         return [
             'city' => $schema->string()->description('The city to get the weather for.'),
         ];
+    }
+
+    /**
+     * Get the tool's structured content.
+     *
+     * @return array<string, mixed>
+     */
+    public function structuredContent(Request $request): array
+    {
+        return $this->getContent($request);
     }
 
     public function getContent(Request $request): array

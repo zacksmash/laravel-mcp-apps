@@ -3,6 +3,7 @@
 namespace App\Mcp\Tools;
 
 use App\Mcp\Support\SecuritySchemes;
+use Laravel\Mcp\Request;
 use Laravel\Mcp\Server\Tool as McpTool;
 
 /**
@@ -18,31 +19,11 @@ class Tool extends McpTool
     protected ?array $structured_content = null;
 
     /**
-     * @param  array<string, mixed>|string  $meta
-     */
-    public function setStructuredContent(array|string $content, mixed $value = null): void
-    {
-        $this->structured_content ??= [];
-
-        if (! is_array($content)) {
-            if (is_null($value)) {
-                throw new InvalidArgumentException('Value is required when using key-value signature.');
-            }
-
-            $this->structured_content[$content] = $value;
-
-            return;
-        }
-
-        $this->structured_content = array_merge($this->structured_content, $content);
-    }
-
-    /**
      * @return array<string, mixed>|null
      */
-    public function structuredContent(): ?array
+    public function structuredContent(Request $request): array
     {
-        return $this->structured_content;
+        return [];
     }
 
     /**

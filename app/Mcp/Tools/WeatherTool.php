@@ -33,9 +33,7 @@ class WeatherTool extends Tool
      */
     public function handle(Request $request)
     {
-        $this->setStructuredContent($this->getContent($request));
-
-        $city = $request->get('city');
+        $city = $request->get('city', 'San Francisco');
 
         return Response::make([
             Response::text("Here is the current weather information you requested for {$city}."),
@@ -64,6 +62,16 @@ class WeatherTool extends Tool
         return [
             $scheme->oauth2('mcp:use'),
         ];
+    }
+
+    /**
+     * Get the tool's structured content.
+     *
+     * @return array<string, mixed>
+     */
+    public function structuredContent(Request $request): array
+    {
+        return $this->getContent($request);
     }
 
     /**
