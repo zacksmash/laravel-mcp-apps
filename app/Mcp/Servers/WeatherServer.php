@@ -64,8 +64,7 @@ class WeatherServer extends Server
     protected function boot(): void
     {
         /**
-         * @override
-         * Method for tools/call
+         * @todo Remove when laravel support structured content & security schemes in MCP servers
          */
         $this->addMethod('tools/call', CallTool::class);
     }

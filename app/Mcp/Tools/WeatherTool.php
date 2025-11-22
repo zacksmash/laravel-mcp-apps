@@ -2,20 +2,24 @@
 
 namespace App\Mcp\Tools;
 
-use App\Enums\OpenAI;
+use App\Mcp\Enums\OpenAI;
 use App\Mcp\Resources\WeatherAppResource;
+use App\Mcp\Support\SecuritySchemes;
 use Illuminate\JsonSchema\JsonSchema;
 use Laravel\Mcp\Request;
 use Laravel\Mcp\Response;
-use Laravel\Mcp\Server\Tool;
 use Laravel\Mcp\Server\Tools\Annotations\IsReadOnly;
 
 #[IsReadOnly()]
 class WeatherTool extends Tool
 {
-    protected array $structured_content = [];
-
-    protected array $meta = [];
+    protected ?array $meta = [
+        OpenAI::OUTPUT_TEMPLATE->value => WeatherAppResource::TEMPLATE,
+        OpenAI::WIDGET_ACCESSIBLE->value => true,
+        OpenAI::TOOL_INVOKING->value => 'Working on it...',
+        OpenAI::TOOL_INVOKED->value => 'Example Tool Completed',
+        OpenAI::RESULT_CAN_PRODUCE_WIDGET->value => true,
+    ];
 
     /**
      * The tool's description.
@@ -27,14 +31,15 @@ class WeatherTool extends Tool
     /**
      * Handle the tool request.
      */
-    public function handle(Request $request): Response|array
+    public function handle(Request $request)
     {
-        $this->structuredContent($this->getContent($request));
-        $this->meta(['route' => 'weather']);
+        $this->setStructuredContent($this->getContent($request));
 
         $city = $request->get('city');
 
-        return Response::text("Here is the current weather information you requested for {$city}.");
+        return Response::make([
+            Response::text("Here is the current weather information you requested for {$city}."),
+        ])->withMeta('route', 'weather');
     }
 
     /**
@@ -49,6 +54,23 @@ class WeatherTool extends Tool
         ];
     }
 
+    /**
+     * Get the tool's input schema.
+     *
+     * @return array<string, array<string, mixed>>
+     */
+    public function securitySchemes(SecuritySchemes $scheme): array
+    {
+        return [
+            $scheme->oauth2('mcp:use'),
+        ];
+    }
+
+    /**
+     * Get the content for the weather tool.
+     *
+     * @return array<string, mixed>
+     */
     protected function getContent(Request $request): array
     {
         return [
@@ -82,52 +104,6 @@ class WeatherTool extends Tool
                     'label' => 'Precip.',
                     'value' => '15%',
                 ],
-            ],
-        ];
-    }
-
-    /**
-     * @custom
-     * This is a custom method to provide content to hydrate the UI component
-     * This may be deprecated in the future to more standardized approach.
-     */
-    public function structuredContent(?array $data = null): ?array
-    {
-        if (empty($data)) {
-            return $this->structured_content;
-        }
-
-        return $this->structured_content = $data;
-    }
-
-    /**
-     * @custom
-     * This is a custom method to provide toolMeta information to the UI component
-     * This may be deprecated in the future to more standardized approach.
-     */
-    public function meta(?array $meta = null): ?array
-    {
-        if (empty($meta)) {
-            return $this->meta;
-        }
-
-        return $this->meta = $meta;
-    }
-
-    /**
-     * @override
-     * Get the tool's array representation.
-     */
-    public function toArray(): array
-    {
-        return [
-            ...parent::toArray(),
-            // Required meta object for OpenAI Apps spec
-            '_meta' => [
-                OpenAI::OUTPUT_TEMPLATE->value => WeatherAppResource::TEMPLATE,
-                OpenAI::WIDGET_ACCESSIBLE->value => true,
-                OpenAI::TOOL_INVOKING->value => 'Working on it...',
-                OpenAI::TOOL_INVOKED->value => 'Example Tool Completed',
             ],
         ];
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enums;
+namespace App\Mcp\Enums;
 
 enum OpenAI: string
 {
@@ -8,6 +8,7 @@ enum OpenAI: string
     case WIDGET_ACCESSIBLE = 'openai/widgetAccessible';
     case TOOL_INVOKING = 'openai/toolInvocation/invoking';
     case TOOL_INVOKED = 'openai/toolInvocation/invoked';
+    case RESULT_CAN_PRODUCE_WIDGET = 'openai/resultCanProduceWidget';
 
     case WIDGET_DESCRIPTION = 'openai/widgetDescription';
     case WIDGET_PREFERS_BORDER = 'openai/widgetPrefersBorder';

@@ -2,8 +2,7 @@
 
 namespace App\Mcp\Resources;
 
-use App\Enums\OpenAI;
-use App\Mcp\Content\App;
+use App\Mcp\Enums\OpenAI;
 use Laravel\Mcp\Response;
 use Laravel\Mcp\Server\Resource;
 
@@ -36,8 +35,12 @@ class WeatherAppResource extends Resource
          * The app macro is defined in AppServiceProvider to configure the UI options
          * This may be deprecated in the future to a more standardized approach.
          */
-        return Response::app(view('mcp.app'),
-            fn (App $app) => $app->prefersBorder()
-        );
+        return Response::text(view('mcp.app')->render())
+            ->withMeta(OpenAI::WIDGET_PREFERS_BORDER->value, true)
+            ->withMeta(OpenAI::WIDGET_CSP->value, [
+                'connect_domains' => [
+                    'https://vite.mcpauth.test',
+                ],
+            ]);
     }
 }

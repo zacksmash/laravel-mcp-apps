@@ -5,14 +5,11 @@ namespace App\Mcp\Tools;
 use Illuminate\JsonSchema\JsonSchema;
 use Laravel\Mcp\Request;
 use Laravel\Mcp\Response;
-use Laravel\Mcp\Server\Tool;
 use Laravel\Mcp\Server\Tools\Annotations\IsReadOnly;
 
 #[IsReadOnly()]
 class UpdateWeatherTool extends Tool
 {
-    protected $structured_content;
-
     /**
      * The tool's description.
      */
@@ -25,7 +22,7 @@ class UpdateWeatherTool extends Tool
      */
     public function handle(Request $request): Response
     {
-        $this->structuredContent($this->getContent($request));
+        $this->setStructuredContent($this->getContent($request));
 
         return Response::text('Weather widget updated successfully.');
     }
@@ -77,19 +74,5 @@ class UpdateWeatherTool extends Tool
                 ],
             ],
         ];
-    }
-
-    /**
-     * @custom
-     * This is a custom method to provide content to hydrate the ui component
-     * This may be deprecated in the future to more standardized approach.
-     */
-    public function structuredContent(?array $data = null): array
-    {
-        if (empty($data)) {
-            return $this->structured_content;
-        }
-
-        return $this->structured_content = $data;
     }
 }
