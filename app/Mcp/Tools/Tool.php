@@ -36,6 +36,8 @@ class Tool extends McpTool
 
     /**
      * Get the tool's array representation.
+     *
+     * @see \Laravel\Mcp\Server\Tool::toArray()
      */
     public function toArray(): array
     {

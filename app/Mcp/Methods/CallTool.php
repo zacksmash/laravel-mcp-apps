@@ -12,6 +12,8 @@ use Laravel\Mcp\Server\Tool;
 
 /**
  * @todo Remove when laravel support structured content & security schemes in MCP servers
+ *
+ * @see \Laravel\Mcp\Server\Methods\CallTool
  */
 class CallTool extends McpCallTool
 {
@@ -21,6 +23,8 @@ class CallTool extends McpCallTool
      *     isError: bool,
      *     structuredContent: array<string, mixed>
      * }
+     *
+     * @see \Laravel\Mcp\Server\Methods\CallTool::serializable()
      */
     protected function serializable(Tool $tool): callable
     {

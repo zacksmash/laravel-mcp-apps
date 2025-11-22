@@ -65,6 +65,8 @@ class WeatherServer extends Server
     {
         /**
          * @todo Remove when laravel support structured content & security schemes in MCP servers
+         *
+         * @see \Laravel\Mcp\Server\Methods\CallTool
          */
         $this->addMethod('tools/call', CallTool::class);
     }
