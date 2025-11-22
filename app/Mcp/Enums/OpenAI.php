@@ -2,22 +2,31 @@
 
 namespace App\Mcp\Enums;
 
-enum OpenAI: string
+class OpenAI
 {
-    case OUTPUT_TEMPLATE = 'openai/outputTemplate';
-    case WIDGET_ACCESSIBLE = 'openai/widgetAccessible';
-    case TOOL_INVOKING = 'openai/toolInvocation/invoking';
-    case TOOL_INVOKED = 'openai/toolInvocation/invoked';
-    case RESULT_CAN_PRODUCE_WIDGET = 'openai/resultCanProduceWidget';
+    const OUTPUT_TEMPLATE = 'openai/outputTemplate';
 
-    case WIDGET_DESCRIPTION = 'openai/widgetDescription';
-    case WIDGET_PREFERS_BORDER = 'openai/widgetPrefersBorder';
-    case WIDGET_CSP = 'openai/widgetCSP';
-    case WIDGET_DOMAIN = 'openai/widgetDomain';
+    const WIDGET_ACCESSIBLE = 'openai/widgetAccessible';
 
-    case LOCALE = 'openai/locale';
-    case USER_AGENT = 'openai/userAgent';
-    case USER_LOCATION = 'openai/userLocation';
+    const TOOL_INVOKING = 'openai/toolInvocation/invoking';
 
-    case MIME_TYPE = 'text/html+skybridge';
+    const TOOL_INVOKED = 'openai/toolInvocation/invoked';
+
+    const RESULT_CAN_PRODUCE_WIDGET = 'openai/resultCanProduceWidget';
+
+    const WIDGET_DESCRIPTION = 'openai/widgetDescription';
+
+    const WIDGET_PREFERS_BORDER = 'openai/widgetPrefersBorder';
+
+    const WIDGET_CSP = 'openai/widgetCSP';
+
+    const WIDGET_DOMAIN = 'openai/widgetDomain';
+
+    const LOCALE = 'openai/locale';
+
+    const USER_AGENT = 'openai/userAgent';
+
+    const USER_LOCATION = 'openai/userLocation';
+
+    const MIME_TYPE = 'text/html+skybridge';
 }

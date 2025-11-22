@@ -14,11 +14,11 @@ use Laravel\Mcp\Server\Tools\Annotations\IsReadOnly;
 class WeatherTool extends Tool
 {
     protected ?array $meta = [
-        OpenAI::OUTPUT_TEMPLATE->value => WeatherAppResource::TEMPLATE,
-        OpenAI::WIDGET_ACCESSIBLE->value => true,
-        OpenAI::TOOL_INVOKING->value => 'Working on it...',
-        OpenAI::TOOL_INVOKED->value => 'Example Tool Completed',
-        OpenAI::RESULT_CAN_PRODUCE_WIDGET->value => true,
+        OpenAI::OUTPUT_TEMPLATE => WeatherAppResource::TEMPLATE,
+        OpenAI::WIDGET_ACCESSIBLE => true,
+        OpenAI::TOOL_INVOKING => 'Working on it...',
+        OpenAI::TOOL_INVOKED => 'Example Tool Completed',
+        OpenAI::RESULT_CAN_PRODUCE_WIDGET => true,
     ];
 
     /**

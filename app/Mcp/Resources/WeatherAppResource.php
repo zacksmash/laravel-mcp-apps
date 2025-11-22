@@ -16,7 +16,7 @@ class WeatherAppResource extends Resource
 
     protected string $uri = self::TEMPLATE;
 
-    protected string $mimeType = OpenAI::MIME_TYPE->value;
+    protected string $mimeType = OpenAI::MIME_TYPE;
 
     /**
      * The resource's description.
@@ -36,8 +36,8 @@ class WeatherAppResource extends Resource
          * This may be deprecated in the future to a more standardized approach.
          */
         return Response::text(view('mcp.app')->render())
-            ->withMeta(OpenAI::WIDGET_PREFERS_BORDER->value, true)
-            ->withMeta(OpenAI::WIDGET_CSP->value, [
+            ->withMeta(OpenAI::WIDGET_PREFERS_BORDER, true)
+            ->withMeta(OpenAI::WIDGET_CSP, [
                 'connect_domains' => [
                     'https://vite.mcpauth.test',
                 ],
