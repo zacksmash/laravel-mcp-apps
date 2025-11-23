@@ -42,7 +42,7 @@ export default defineConfig({
 
     resolve: {
         alias: {
-            '@mcp': '/resources/mcp/',
+            '@mcp': '/resources/mcp',
         },
     },
 });
