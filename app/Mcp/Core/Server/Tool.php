@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mcp\Tools;
+namespace App\Mcp\Core\Server;
 
 use App\Mcp\Support\SecuritySchemes;
 use Laravel\Mcp\Request;

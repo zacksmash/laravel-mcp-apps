@@ -2,6 +2,7 @@
 
 namespace {{ namespace }};
 
+use App\Mcp\Core\Server\Tool;
 use App\Mcp\Support\SecuritySchemes;
 use Illuminate\JsonSchema\JsonSchema;
 use Laravel\Mcp\Request;
@@ -47,7 +48,7 @@ class {{ class }} extends Tool
 
     /**
      * Get the tool's structured content.
-     * 
+     *
      * @return array<string, mixed>
      */
     // public function structuredContent(Request $request): array {}

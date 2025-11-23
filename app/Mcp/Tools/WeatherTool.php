@@ -2,6 +2,7 @@
 
 namespace App\Mcp\Tools;
 
+use App\Mcp\Core\Server\Tool;
 use App\Mcp\Enums\McpApp;
 use App\Mcp\Resources\WeatherAppResource;
 use App\Mcp\Support\SecuritySchemes;

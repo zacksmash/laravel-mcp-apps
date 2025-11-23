@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mcp\Methods;
+namespace App\Mcp\Core\Server\Methods;
 
 use Illuminate\Container\Container;
 use Illuminate\Support\Collection;

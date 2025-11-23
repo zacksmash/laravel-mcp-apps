@@ -2,7 +2,7 @@
 
 namespace App\Mcp\Servers;
 
-use App\Mcp\Methods\CallTool;
+use App\Mcp\Core\Server\Methods\CallTool;
 use Laravel\Mcp\Server;
 
 class WeatherServer extends Server
