@@ -7,7 +7,7 @@ import {
     useWidgetProps,
     useWidgetState,
     useRequestModal
-} from '@mcp/composables/openai';
+} from '@zacksmash/vue-open-ai-apps';
 import { type WeatherWidgetData, type WeatherWidgetState } from '@mcp/types';
 import { computed, Ref, ref } from 'vue';
 

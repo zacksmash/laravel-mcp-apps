@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useWidgetMeta } from '@mcp/composables/openai';
+import { useWidgetMeta } from '@zacksmash/vue-open-ai-apps';
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
