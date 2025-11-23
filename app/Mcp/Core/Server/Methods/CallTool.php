@@ -11,7 +11,7 @@ use Laravel\Mcp\Server\Methods\CallTool as McpCallTool;
 use Laravel\Mcp\Server\Tool;
 
 /**
- * @todo Remove when laravel support structured content & security schemes in MCP servers
+ * @todo Remove when laravel mcp supports structured content
  *
  * @see \Laravel\Mcp\Server\Methods\CallTool
  */

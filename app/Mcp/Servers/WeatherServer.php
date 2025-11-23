@@ -2,8 +2,7 @@
 
 namespace App\Mcp\Servers;
 
-use App\Mcp\Core\Server\Methods\CallTool;
-use Laravel\Mcp\Server;
+use App\Mcp\Core\Server;
 
 class WeatherServer extends Server
 {
@@ -60,14 +59,4 @@ class WeatherServer extends Server
     protected array $prompts = [
         //
     ];
-
-    protected function boot(): void
-    {
-        /**
-         * @todo Remove when laravel support structured content & security schemes in MCP servers
-         *
-         * @see \Laravel\Mcp\Server\Methods\CallTool
-         */
-        $this->addMethod('tools/call', CallTool::class);
-    }
 }

@@ -7,7 +7,7 @@ use Laravel\Mcp\Request;
 use Laravel\Mcp\Server\Tool as McpTool;
 
 /**
- * @todo Remove when laravel support structured content & security schemes in MCP servers
+ * @todo Remove when laravel mcp supports structured content & security schemes
  *
  * @see \Laravel\Mcp\Server\Tool
  */

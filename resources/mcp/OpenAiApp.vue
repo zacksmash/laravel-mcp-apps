@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { OpenAiProvider } from '@zacksmash/vue-open-ai-apps';
+import { OpenAIProvider } from '@zacksmash/vue-open-ai-apps';
 import App from '@mcp/views/App.vue';
 </script>
 
 <template>
-  <OpenAiProvider>
+  <OpenAIProvider>
     <!-- loading slot -->
     <template #loading>
       <div class="flex flex-col items-center justify-center py-4 gap-3">
@@ -32,5 +32,5 @@ import App from '@mcp/views/App.vue';
         </button>
       </div>
     </template>
-  </OpenAiProvider>
+  </OpenAIProvider>
 </template>

@@ -16,7 +16,7 @@
     "dependencies": {
         "@inertiajs/vue3": "^2.1.0",
         "@vueuse/core": "^12.8.2",
-        "@zacksmash/vue-open-ai-apps": "^0.0.7",
+        "@zacksmash/vue-open-ai-apps": "^0.0.8",
         "apexcharts": "^5.3.5",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
