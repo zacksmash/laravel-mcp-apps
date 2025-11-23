@@ -3,10 +3,10 @@ import '@mcp/assets/main.css';
 import { createPinia } from 'pinia';
 import { createApp } from 'vue';
 
-import App from '@mcp/App.vue';
+import OpenAiApp from '@mcp/OpenAiApp.vue';
 import { router } from '@mcp/router';
 
-const app = createApp(App);
+const app = createApp(OpenAiApp);
 
 app.use(createPinia());
 app.use(router);
