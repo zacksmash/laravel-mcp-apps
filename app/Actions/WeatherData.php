@@ -13,26 +13,26 @@ class WeatherData
             'date' => now()->format('l M jS, Y'),
             'temp' => [
                 'current' => [
-                    'c' => 25,
-                    'f' => 77,
+                    'c' => 3,
+                    'f' => 38,
                 ],
                 'high' => [
-                    'c' => 26,
-                    'f' => 79,
+                    'c' => 7,
+                    'f' => 44,
                 ],
                 'low' => [
-                    'c' => 19,
-                    'f' => 66,
+                    'c' => -1,
+                    'f' => 31,
                 ],
             ],
             'conditions' => [
                 [
                     'label' => 'Wind Dir.',
-                    'value' => 'N/A',
+                    'value' => 'SW',
                 ],
                 [
                     'label' => 'Humidity',
-                    'value' => '420%',
+                    'value' => '21%',
                 ],
                 [
                     'label' => 'Precip.',
