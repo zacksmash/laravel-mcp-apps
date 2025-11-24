@@ -2,6 +2,7 @@
 
 namespace App\Mcp\Tools;
 
+use App\Actions\WeatherData;
 use App\Mcp\Core\Server\Tool;
 use Illuminate\JsonSchema\JsonSchema;
 use Laravel\Mcp\Request;
@@ -18,12 +19,14 @@ class UpdateWeatherTool extends Tool
     Update the weather widget with the latest weather information.
     MARKDOWN;
 
+    public function __construct(public WeatherData $weatherData) {}
+
     /**
      * Handle the tool request.
      */
     public function handle(Request $request): Response
     {
-        $city = $request->get('city', 'Denver');
+        $city = $request->get('city', 'San Francisco');
 
         return Response::text("Weather widget updated successfully for {$city}.");
     }
@@ -47,43 +50,6 @@ class UpdateWeatherTool extends Tool
      */
     public function structuredContent(Request $request): array
     {
-        return $this->getContent($request);
-    }
-
-    public function getContent(Request $request): array
-    {
-        return [
-            // 'user' => auth()->user(),
-            'city' => $request->get('city', 'Denver'),
-            'date' => now()->format('l M jS, Y'),
-            'temp' => [
-                'current' => [
-                    'c' => 25,
-                    'f' => 77,
-                ],
-                'high' => [
-                    'c' => 26,
-                    'f' => 79,
-                ],
-                'low' => [
-                    'c' => 19,
-                    'f' => 66,
-                ],
-            ],
-            'conditions' => [
-                [
-                    'label' => 'Wind Dir.',
-                    'value' => 'N/A',
-                ],
-                [
-                    'label' => 'Humidity',
-                    'value' => '420%',
-                ],
-                [
-                    'label' => 'Precip.',
-                    'value' => '55%',
-                ],
-            ],
-        ];
+        return $this->weatherData->handle($request);
     }
 }

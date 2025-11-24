@@ -40,7 +40,7 @@ const onCallTool = async () => {
     isLoading.value = true;
 
     const res = (await callTool('update-weather-tool', {
-        city: 'Denver',
+        city: toolOutput.value.city,
     })) as any;
 
     isLoading.value = false;

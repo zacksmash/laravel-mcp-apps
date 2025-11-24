@@ -2,6 +2,7 @@
 
 namespace App\Mcp\Tools;
 
+use App\Actions\WeatherData;
 use App\Mcp\Core\Server\Tool;
 use App\Mcp\Enums\McpApp;
 use App\Mcp\Resources\WeatherAppResource;
@@ -28,6 +29,8 @@ class WeatherTool extends Tool
     protected string $description = <<<'MARKDOWN'
     This tool provides current weather data and forecasts
     MARKDOWN;
+
+    public function __construct(public WeatherData $weatherData) {}
 
     /**
      * Handle the tool request.
@@ -72,46 +75,6 @@ class WeatherTool extends Tool
      */
     public function structuredContent(Request $request): array
     {
-        return $this->getContent($request);
-    }
-
-    /**
-     * Get the content for the weather tool.
-     */
-    protected function getContent(Request $request): array
-    {
-        return [
-            // 'user' => auth()->user(),
-            'city' => $request->get('city', 'San Francisco'),
-            'date' => now()->format('l M jS, Y'),
-            'temp' => [
-                'current' => [
-                    'c' => 28,
-                    'f' => 82,
-                ],
-                'high' => [
-                    'c' => 26,
-                    'f' => 78,
-                ],
-                'low' => [
-                    'c' => 15,
-                    'f' => 59,
-                ],
-            ],
-            'conditions' => [
-                [
-                    'label' => 'Wind Dir.',
-                    'value' => 'NE',
-                ],
-                [
-                    'label' => 'Humidity',
-                    'value' => '72%',
-                ],
-                [
-                    'label' => 'Precip.',
-                    'value' => '15%',
-                ],
-            ],
-        ];
+        return $this->weatherData->handle($request);
     }
 }
