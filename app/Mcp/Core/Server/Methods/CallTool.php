@@ -7,7 +7,6 @@ use Illuminate\Support\Collection;
 use Laravel\Mcp\Request;
 use Laravel\Mcp\Response;
 use Laravel\Mcp\ResponseFactory;
-use Laravel\Mcp\Server\Methods\CallTool as McpCallTool;
 use Laravel\Mcp\Server\Tool;
 
 /**
@@ -15,7 +14,7 @@ use Laravel\Mcp\Server\Tool;
  *
  * @see \Laravel\Mcp\Server\Methods\CallTool
  */
-class CallTool extends McpCallTool
+class CallTool extends Laravel\Mcp\Server\Methods\CallTool
 {
     /**
      * @return callable(Collection<int, Response>): array{

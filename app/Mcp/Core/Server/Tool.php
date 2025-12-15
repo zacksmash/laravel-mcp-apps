@@ -4,14 +4,13 @@ namespace App\Mcp\Core\Server;
 
 use App\Mcp\Support\SecuritySchemes;
 use Laravel\Mcp\Request;
-use Laravel\Mcp\Server\Tool as McpTool;
 
 /**
  * @todo Remove when laravel mcp supports structured content & security schemes
  *
  * @see \Laravel\Mcp\Server\Tool
  */
-class Tool extends McpTool
+class Tool extends Laravel\Mcp\Server\Tool
 {
     /**
      * @var array<string, mixed>|null

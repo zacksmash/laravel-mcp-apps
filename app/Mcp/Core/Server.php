@@ -3,9 +3,8 @@
 namespace App\Mcp\Core;
 
 use App\Mcp\Core\Server\Methods\CallTool;
-use Laravel\Mcp\Server as McpServer;
 
-class Server extends McpServer
+class Server extends Laravel\Mcp\Server
 {
     protected function boot(): void
     {
